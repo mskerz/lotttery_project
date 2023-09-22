@@ -1,0 +1,51 @@
+<div class="container mt-4 position-static">
+    <div style="display: flex;flex-direction: column;width: 85%;padding: 20px;">
+        <div>
+            <span   style="display: flex;flex-direction: row;"   > 
+                <mat-form-field class="col-5"  color="primary"     >
+                    <mat-label  >ค้นหาสลาก</mat-label>
+                    <input matInput  size="20px"  name="keyword" placeholder="เลขท้าย 3 ตัว"  [(ngModel)]="keyword"    >
+                    <button *ngIf="keyword" matSuffix mat-icon-button aria-label="Clear" (click)="keyword=''">
+                        <mat-icon>close</mat-icon>
+                      </button>
+                </mat-form-field>
+                 
+                  
+                
+                <button  class="ms-2 text-bg-dark" mat-raised-button color="primary"
+                 style="position:relative;height: 55px;" (click)="SearchLotterybylast_3digit(keyword)"><mat-icon style="font-size: 20px;">search</mat-icon></button>
+            </span>
+            
+            
+            
+        </div>
+    
+        <div>
+            <div class="row">
+                <ng-container *ngFor="let lottery of lotteries">
+                  <mat-card class="col-4 m-3 p-1" style="background-color: rgb(255, 242, 251);">
+                    <div style=" position: relative;">
+                      <span style="top: 0; left: 0; margin-left: 1em;"><img src="../../../assets/image/lottery_logo.gif" width="5%">&nbsp;&nbsp;สลากกินแบ่งรัฐบาล</span>
+                    </div>
+                    <div class="mt-2" style="display: flex; flex-direction: row; margin-left: 20px;">
+                      <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 200, 212);">{{ lottery.lottery_number }}</span>
+                      <span class="ms-2" style="font-size: 15px;">&nbsp;งวดที่ <br><span style="margin-left: 10px;">{{ lottery.draw_no }}</span></span>
+                      <span class="ms-2" style="font-size: 15px;">&nbsp;ชุดที่ <br><span style="margin-left: 10px;">{{ lottery.set_no }}</span></span>
+                    </div>
+                    <div class="m-2" style="display: flex; flex-direction: row;justify-content: space-between;" >
+                      <span style="font-size: 16px;">ร้านเด็กติดเกม</span>
+                      <span style="font-size: 16px;">ราคา {{lottery.price}} บาท</span>
+                    </div>
+                     
+                  </mat-card>
+
+                   
+                </ng-container>
+                
+            </div>
+              
+        </div>
+          
+    
+    </div>
+</div>
