@@ -8,7 +8,7 @@ export class LotteryService {
   api_endpoint:string = 'http://localhost/api_lottery'
   constructor(private http:HttpClient) { }
 
-  getLotteryFromLast3digit(last3digit:string){
-     return this.http.get(this.api_endpoint+"/lottery/"+last3digit);
+  getLotteryFromLast3digit(keyword:string,vaule:string){
+    return this.http.get(this.api_endpoint+"/lottery/"+keyword+"/"+vaule);
   }
 }

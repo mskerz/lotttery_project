@@ -20,6 +20,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { ToastModule } from 'primeng/toast';
+
 
 
 @NgModule({
@@ -46,6 +51,11 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MatFormFieldModule,
     FormsModule,
+    MatSelectModule,
+    MessagesModule,
+    MessageModule,
+    ToastModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
