@@ -1,23 +1,28 @@
-<div class="container">
-    <div class="row">
-      <div class="col-mat-6 offset-mat-3">
-          <mat-card>
-            <mat-card-title>Login</mat-card-title>
-            <mat-card-content>
-              <form class="example-form">
-                <div>
-                <mat-form-field style="width:400px !important;" class="example-full-width">
-                    <input matInput placeholder="Email" type="text" #email>
-                </mat-form-field>
-                </div>
-                <div>
-                <mat-form-field style="width:400px !important;" class="example-full-width">
-                  <input matInput placeholder="Password" type="password" #password >
-                </mat-form-field>
-                </div>
-              </form>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>  
+<div class="container ms-auto me-auto p-2" style="position: absolute; width: 100%;">
+  <div class="bg-white p-3 rounded-4 col-5 shadow-none" style="position: relative; text-align: center;">
+      <div class="p-4" style="display: flex; flex-direction: column;">
+          <div class="text-center p-1" style="font-size: 30px; font-weight: bold;">เข้าสู่ระบบ</div>
+           
+          <mat-form-field>
+              <mat-label>อีเมล์</mat-label>
+              <input matInput type="email"  [(ngModel)]="email"  [formControl]="emailFormControl" [errorStateMatcher]="email_matcher">
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                <span>กรุณากรอก<strong>รหัสผ่าน</strong></span>
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('email')">
+                กรอก e-mail ให้ถูกต้อง
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <mat-label>รหัสผ่าน</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'"   >
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+               
+          </mat-form-field>
+         
+          <button mat-raised-button color="primary" class="col-4 mx-auto" style="font-size: 20px;display: block;  "><span>Login</span></button>
+      </div>
   </div>
+</div>

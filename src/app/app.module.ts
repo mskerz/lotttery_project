@@ -19,11 +19,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import { FormControl,FormGroupDirective,NgForm,Validators,FormsModule,ReactiveFormsModule,} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
+import { LotteryComponent } from './page/lottery/lottery.component';
+import { NgIf } from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
+
 
 
 
@@ -36,13 +42,17 @@ import { ToastModule } from 'primeng/toast';
     MemberComponent,
     MainComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LotteryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule, 
+    NgIf,
     // Material Angular Module
     MatButtonModule,
     MatCardModule,
@@ -50,11 +60,12 @@ import { ToastModule } from 'primeng/toast';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
-    FormsModule,
     MatSelectModule,
     MessagesModule,
     MessageModule,
-    ToastModule
+    ToastModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
   ],
   providers: [],

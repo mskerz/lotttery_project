@@ -1,5 +1,6 @@
-p-toast {
-    font-size: 12px;
-    width: 50% !important;
-      /* ปรับขนาดของระยะห่างระหว่าง Toast และ container ตามต้องการ */
+
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ทำให้คอมโพเนนต์เต็มหน้าจอ */
   }
