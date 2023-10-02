@@ -1,24 +1,88 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark"  >
   <div class="container-fluid">
-      <a class="navbar-brand" href="">{{title}}</a>
-     
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav "> <!-- ใช้ ml-auto เพื่อย้ายเมนูไปทางซ้ายสุด -->
-              <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/lottery">ค้นหาสลาก</a>
-              </li>
+    <a class="navbar-brand" href="">{{ title }}</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li *ngIf="!isLoggedIn" class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/lottery">ค้นหาสลาก</a>
+        </li>
+        <div *ngIf="isLoggedIn">
+        
+            <li *ngIf="!IsAdmin" class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/member/lottery">ค้นหาสลาก</a>
+            </li>
+            <li *ngIf="IsAdmin" class="nav-item">
+              <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="menu">จัดการ</button>
+              <mat-menu  #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>search</mat-icon>
+                  <a href="/admin/lottery" style="color: rgb(0, 0, 0); text-decoration: none;"><span >ค้นหาสลาก</span></a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <a href="/admin/lottery/manage" style="color: rgb(0, 0, 0); text-decoration: none;"><span >จัดการสลาก</span></a>
+                </button>
               
-          </ul>
-          <ul class="nav navbar-nav me-3" style="margin-left: auto; display: flex; flex-direction: row;">
-            <li style="margin-right: 10px;">
-              <a href="/login" class="me-2 " style="color: white;text-decoration: none;" mat-button >Login</a>
+              </mat-menu>
             </li>
-            <li>
-              <a href="/register" class="ms-2" style="color: white; text-decoration: none;" mat-raised-button color="primary">Sign Up</a>
+        </div>
+
+      </ul>
+      <ul class="nav navbar-nav  " style="margin-left: auto; display: flex; flex-direction: row;">
+        <div *ngIf="!isLoggedIn" class="d-inline-flex">
+            <li >
+              <button routerLink="/login" class="  btn" style="color: white; text-decoration: none;" >เข้าสู่ระบบ</button>
             </li>
-          </ul>
-          
-          
-      </div>
+            <li  >
+              <a routerLink="/register" class="  btn btn-primary" style="color: white; text-decoration: none;"  >สมัครสมาชิก</a>
+            </li>
+        </div>
+        <div *ngIf="isLoggedIn">
+            <li *ngIf="!IsAdmin">
+              <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
+              <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
+              <a   style="color: white;text-decoration: none;" mat-button (click)="OpenCart()">
+                  <mat-icon >shopping_cart</mat-icon>ตะกร้า
+                  <p-badge [value]="cartItemCount.toString()" severity="info" [hidden]="IsCartEmpty()"></p-badge>
+                </a>
+              <a style="color: white;text-decoration: none;" routerLink="#" mat-button [matMenuTriggerFor]="history_menu"><mat-icon>history</mat-icon></a>
+              <mat-menu #history_menu="matMenu">
+                  <button mat-button>ประวัติการซื้อสลาก</button>
+              </mat-menu>
+              <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+              <mat-menu  #menu="matMenu">
+                <button mat-menu-item>
+                  <i class="pi pi-user"  ></i>
+                  <a routerLink="/member" style="color: rgb(0, 0, 0); text-decoration: none;"><span >&nbsp;&nbsp;โปรไฟล์ของคุณ</span></a>
+                </button>
+                
+                <button mat-menu-item>
+                  <mat-icon>logout</mat-icon>
+                  <a routerLink="/login" style="color: rgb(0, 0, 0); text-decoration: none;" (click)="Logout()"><span>ออกจากระบบ</span></a>
+                </button>
+              </mat-menu>
+           
+            </li>
+        </div>
+        <div *ngIf="isLoggedIn">
+          <li *ngIf="IsAdmin">
+            <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
+            <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
+            <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+            <mat-menu  #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>account_circle</mat-icon>
+                <a routerLink="/admin" style="color: rgb(0, 0, 0); text-decoration: none;"><span >โปรไฟล์ของคุณ</span></a>
+              </button>
+              
+              <button mat-menu-item>
+                <mat-icon>logout</mat-icon>
+                <a routerLink="/login" style="color: rgb(0, 0, 0); text-decoration: none;" (click)="Logout()"><span >ออกจากระบบ</span></a>
+              </button>
+            </mat-menu>
+          </li>
+        </div>
+      </ul>
+    </div>
   </div>
 </nav>

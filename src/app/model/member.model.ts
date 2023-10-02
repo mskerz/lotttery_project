@@ -20,7 +20,16 @@ export class Convert {
         return JSON.parse(json);
     }
 
-    public static MembersToJson(value: Member[]): string {
+    public static MembersToJson(value: Member): string {
+        return JSON.stringify(value);
+    }
+
+
+    public static toMember(json: string): Member {
+        return JSON.parse(json);
+    }
+
+    public static MemberToJson(value: Member): string {
         return JSON.stringify(value);
     }
 }

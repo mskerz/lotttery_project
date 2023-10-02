@@ -3,8 +3,9 @@
     <div style="display: flex;flex-direction: column;width: 85%;padding: 20px;">
         <div>
             <span   style="display: flex;flex-direction: row;"   > 
+              
                 <mat-form-field   class="col-2" style="margin-right: 10px;" >
-                  <mat-label>คำค้นหา</mat-label>
+                   
                   <mat-select  [(ngModel)]="keyword"  >
                     <mat-option value="last3digit" class="active"> 3 เลขท้าย</mat-option>
                     <mat-option value="draw_no"> งวดที่ </mat-option>
@@ -23,7 +24,7 @@
                  
                   
                 
-                <button  class="ms-2 text-bg-dark" mat-raised-button color="primary"
+                <button  class="ms-2 text-bg-light" mat-raised-button color="primary"
                  style="position:relative;height: 55px;" (click)="SearchLotterybyKeyword(keyword,value)"><mat-icon style="font-size: 20px;">search</mat-icon></button>
             </span>
            
@@ -51,7 +52,8 @@
                       <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 200, 212);">{{ lottery.lottery_number }}</span>
                       <span class="ms-2" style="font-size: 15px;">&nbsp;งวดที่ <br><span style="margin-left: 10px;">{{ lottery.draw_no }}</span></span>
                       <span class="ms-2" style="font-size: 15px;">&nbsp;ชุดที่ <br><span style="margin-left: 10px;">{{ lottery.set_no }}</span></span>
-                      <span  class="ms-4"><button mat-raised-button color="primary" disabled>เลือก</button></span>
+                      <span *ngIf="IsLoggedIn" class="ms-4"><button mat-raised-button color="primary" (click)="addToCart(lottery)"  ><mat-icon>add</mat-icon> <mat-icon>shopping_cart</mat-icon></button></span>
+                      <span *ngIf="!IsLoggedIn" class="ms-4"><button mat-raised-button color="primary" disabled>เลือก</button></span>
                     </div>
                     <div class="m-2" style="display: flex; flex-direction: row;justify-content: space-between;" >
                       <span style="font-size: 16px;">ร้านเด็กติดเกม</span>

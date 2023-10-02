@@ -1,0 +1,41 @@
+<div class="container mt-5 p-5">
+  <div class="d-flex flex-column">
+    <!-- lottery-manage.component.html -->
+
+    <!-- lottery-manage.component.html -->
+    <p-table class="table-responsive" [value]="lotteries" [rows]="6"  [paginator]="true" [paginatorPosition]="'bottom'">
+        <ng-template pTemplate="caption"   style="font-family: 'Prompt', sans-serif !important;"> รายการสลากกินแบ่งรํฐบาล   
+           <div class="mb-3">
+            <button mat-raised-button color="primary" >เพิ่มสลากเข้าสู่ระบบ<mat-icon>add</mat-icon></button>
+           </div>
+        
+        </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ลำดับ</th>
+          <th>หมายเลขสลาก</th>
+          <th>งวดที่</th>
+          <th>ชุดที่</th>
+          <th>ราคาสลาก</th>
+          <th>จำนวนสลาก</th>
+          <th>จัดการ</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-lottery  >
+        <tr>
+          <td>{{ lottery.idx }}</td>
+          <td>{{ lottery.lottery_number }}</td>
+          <td>{{ lottery.draw_no }}</td>
+          <td>{{ lottery.set_no }}</td>
+          <td>{{ lottery.price }} บาท</td>
+          <td>{{ lottery.lottery_quantity }}</td>
+          <td>
+             <a  (click)="alert()"  mat-icon-button  class="mat-custom-button" ><mat-icon>edit</mat-icon></a>
+             <a  (click)="alert()" mat-icon-button color="warn"><mat-icon>remove</mat-icon></a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    
+  </div>
+</div>

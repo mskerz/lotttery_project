@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import {HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,9 +28,19 @@ import { LotteryComponent } from './page/lottery/lottery.component';
 import { NgIf } from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-
-
-
+import {MatProgressSpinnerModule as MatSpinnerModule} from '@angular/material/progress-spinner';
+import {MatMenuModule} from '@angular/material/menu';
+import { CartComponent } from './dialog/cart/cart.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BadgeModule } from 'primeng/badge';
+import { TableModule } from 'primeng/table';
+import { ProfileComponent } from './page/profile/profile.component';
+import { HomeComponent } from './page/home/home.component';
+import { LotteryManageComponent } from './page/lottery-manage/lottery-manage.component';
+import {MatTableModule} from '@angular/material/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import {  MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -43,7 +53,11 @@ import {MatNativeDateModule} from '@angular/material/core';
     MainComponent,
     HeaderComponent,
     FooterComponent,
-    LotteryComponent
+    LotteryComponent,
+    CartComponent,
+    ProfileComponent,
+    HomeComponent,
+    LotteryManageComponent
   ],
   imports: [
     BrowserModule,
@@ -65,10 +79,18 @@ import {MatNativeDateModule} from '@angular/material/core';
     MessageModule,
     ToastModule,
     MatDatepickerModule,
-    MatNativeDateModule
-    
-  ],
-  providers: [],
+    MatNativeDateModule,
+    MatSpinnerModule,
+    MatMenuModule,
+    MatDialogModule,
+    BadgeModule,
+    TableModule,
+    MatTableModule,
+    DropdownModule,
+    InputTextModule,
+    MatSnackBarModule
+   ],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

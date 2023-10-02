@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
- 
+@import "../node_modules/primeicons/primeicons.css";
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 html, body { height: 100%; }
 body { 
     margin: 0; 
-     
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(97,186,255,1) 0%, rgba(166,239,253,1) 90.1% );
+    font-family: 'Prompt', sans-serif !important;
+    background-image: url('/assets/image/wallpaper.jpg');
 
 }

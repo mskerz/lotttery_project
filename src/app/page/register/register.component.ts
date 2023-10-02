@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Convert as memberCovert,Member } from 'src/app/model/member.model';
 import { AuthService } from 'src/app/service/auth.service';
   
@@ -14,25 +16,29 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./register.component.scss'],
   
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
  
   members = Array<Member>();
-   
+  Current_member: any;
   hide = true;
   response:any;
   //field register
   
-    email :string= 'a';
-    password  :string= 'b';
-    fullname :string='c';
-    birthdate :string='d';
-    phone_no :string='f';
-  
+    email :string= '';
+    password  :string= '';
+    fullname :string='';
+    birthdate :string='';
+    phone_no :string='';
+
+    
   
 
-  constructor(private auth:AuthService,private http:HttpClient) {
+  constructor(private auth:AuthService,private http:HttpClient,private router:Router,private title:Title) {
      
   } 
+  ngOnInit() {
+    this.title.setTitle('สมัครสมาชิก');
+  }
 
   onRegister() {
     // ตรวจสอบว่าข้อมูลที่จำเป็นถูกป้อนหรือไม่
@@ -43,7 +49,7 @@ export class RegisterComponent {
       birthdate :this.birthdate,
       phone_no :this.phone_no
     }
-    console.log(JSON_Object);
+    // console.log(JSON_Object);
     
 
     let json_string = JSON.stringify(JSON_Object);
@@ -57,16 +63,36 @@ export class RegisterComponent {
         this.members = memberCovert.toMembers(JSON.stringify(data));
         // ตรวจสอบว่าอีเมลซ้ำหรือไม่
         const isEmailDuplicate = this.members.some(member => member.email === this.email);
+        
         if (isEmailDuplicate) {
           console.log(" this email is duplicated");
         } else {
           // ถ้าไม่ซ้ำให้ทำการลงทะเบียน
           this.http.post(this.auth.api_endpoint + "/member/register", json_string ,{observe:'response'}).subscribe((res) => {
             // ดำเนินการหลังจากการลงทะเบียนเสร็จสิ้น
-             
+            
             console.log(res.status);
             console.log(res.body);
             console.log("Register Successfully!");
+            console.log("ทดลองเรียกข้อมูลจากemail มาเก็บใน localstorage");
+            this.http.get(this.auth.api_endpoint+"/member/"+this.email).subscribe((data:any) => {
+                console.log(data.user_id);
+              //set storage
+               let user_current = {
+                user_id : data.user_id,
+                email: this.email,
+                fullname:this.fullname,
+                birthdate :this.birthdate,
+                phone_no :this.phone_no
+              }
+              localStorage.setItem('currentUser', JSON.stringify(user_current));
+               
+           });
+             
+            // localStorage.setItem('currentUser', JSON.stringify(JSON_Object));
+            // console.log("Success");
+            this.router.navigate(['/member']);
+            
 
             
           });
