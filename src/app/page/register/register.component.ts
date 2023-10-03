@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Convert as memberCovert,Member } from 'src/app/model/member.model';
 import { AuthService } from 'src/app/service/auth.service';
+import Swal from 'sweetalert2';
   
 
 
@@ -65,7 +66,11 @@ export class RegisterComponent implements OnInit {
         const isEmailDuplicate = this.members.some(member => member.email === this.email);
         
         if (isEmailDuplicate) {
-          console.log(" this email is duplicated");
+          Swal.fire({
+            title: 'แจ้งเตือน',
+            text: 'อีเมล์นี้มีผู้ใช้งานแล้ว',
+            timer:2000,
+          })
         } else {
           // ถ้าไม่ซ้ำให้ทำการลงทะเบียน
           this.http.post(this.auth.api_endpoint + "/member/register", json_string ,{observe:'response'}).subscribe((res) => {

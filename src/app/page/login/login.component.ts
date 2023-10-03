@@ -71,11 +71,11 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           if(response.roles=="admin"){
             setTimeout(() => {
-              this.route.navigate(['/admin']);
+              this.route.navigate(['/admin/lottery']);
             }, 2000);
           }else{
             setTimeout(() => {
-              this.route.navigate(['/member']);
+              this.route.navigate(['/member/lottery']);
             }, 2000);
           }
           localStorage.setItem('currentUser', JSON.stringify(response));

@@ -1,0 +1,45 @@
+<div class="container" style="width: 500px;">
+    <div   style="margin-left: auto;">
+        <button mat-icon-button  class="mt-2" style="top:0; float: right;color: red;" (click)="close()"><mat-icon>close</mat-icon></button>
+    </div>
+    <div  class="p-4" >
+    
+            <p class="text-center">แบบฟอร์มเพิ่มสลาก</p>
+            <div class="d-flex flex-column  " >
+                <div class="mb-3 m-2 ">
+                    <label for="">หมายเลขสลาก </label> <br>
+                    <div class="d-flex flex-row">
+                        <input type="text" class="form-control  "  [ngModel]="lottery.lottery_number"  >
+                        <button class="btn btn-dark ms-2"  (click)="generateNumber()">สุ่ม</button>
+                    </div>
+                    
+                    
+                </div>
+            
+                <div  class="mb-3 m-2">,
+                    <label for="">งวดที่</label>
+                    <select [(ngModel)]="lottery.draw_no" class="form-select  ">
+                    <option *ngFor="let item of draw_set" [value]="item.draw_no">{{ item.draw_no }}</option>
+                    </select>
+                </div>
+                <div  class="mb-3 m-2">
+                    <label for="">ชุดที่</label>
+                    <select [(ngModel)]="lottery.set_no" class="form-select  " aria-placeholder="H">
+                    <option *ngFor="let item of draw_set" [value]="item.set_no">{{ item.set_no }}</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 m-2">
+                    <label for="">ราคาสลาก</label>
+                    <input type="text" [(ngModel)]="lottery.price" class="form-control ">
+                </div>
+                <div class="mb-3 m-2">
+                    <label for="">จำนวนสลาก</label>
+                    <input type="text" [(ngModel)]="lottery.lottery_quantity" class="form-control ">
+
+                </div>
+            </div>
+            <button class="btn btn-primary d-inline-flex align-items-center justify-content-center" (click)="insert(lottery)"  ><mat-icon>add</mat-icon>&nbsp;เพิ่มสลาก</button>
+
+    </div>
+</div>

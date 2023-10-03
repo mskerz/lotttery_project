@@ -1,76 +1,95 @@
 
-<div class="container mt-4">
-    <div style="display: flex;flex-direction: column;width: 85%;padding: 20px;">
-        <div>
-            <span   style="display: flex;flex-direction: row;"   > 
+<div class="container">
+  <div class="d-flex justify-content-center align-item-center">
+          <div class="p-2 ">
+              <p class="text-center text-success" style="font-size: 30px;">ค้นหาสลาก</p>
+              <div class="d-flex flex-row" >
               
-                <mat-form-field   class="col-2" style="margin-right: 10px;" >
-                   
-                  <mat-select  [(ngModel)]="keyword"  >
-                    <mat-option value="last3digit" class="active"> 3 เลขท้าย</mat-option>
-                    <mat-option value="draw_no"> งวดที่ </mat-option>
-                    <mat-option value="set_no"> ชุดที่ </mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field class="col-5"  color="primary"     >
+                  <div class="m-2">
+                      <input type="text" class="form-control text-center input-size" disabled value="-"  size="1" >
+          
+                  </div>
+                  <div class="m-2">
+                      <input type="text" class="form-control text-center input-size" disabled value="-" size="1" >
+                  </div>
+                  <div class="m-2">
+                      <input type="text" class="form-control text-center input-size" disabled value="-"  size="1" >
+          
+                  </div>
+                  <div class="m-2">
+                      <input type="number" class="form-control input-size" size="1" maxlength="1" [(ngModel)]="digit_1"  max="9" min="0">
+          
+                  </div>
+                  <div class="m-2">
+                      <input type="number" class="form-control input-size"  size="1" maxlength="1"  [(ngModel)]="digit_2" max="9" min="0">
+                  </div>
+                  <div class="m-2">
+                      <input type="number" class="form-control input-size" size="1" maxlength="1"  [(ngModel)]="digit_3"  max="9" min="0">
+                  </div>
+          
+              </div>
+              <input type="hidden" [(ngModel)]="last3digit">
+              
+              <div class="d-flex justify-content-center align-items-center">
+                  <div class="d-flex flex-column">
                     
-                    <mat-label  >ค้นหาสลาก</mat-label>
-                    <input matInput  size="20px"    placeholder="keyword"  [(ngModel)]="value"    >
-                    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <div class="d-flex flex-row m-3">
+                      <div class="m-2 p-2">
+                        <label class="text-white" for="">งวดที่</label>
+                        <input type="text" class="form-control" [(ngModel)]="draw_no"  >
+                      </div>
+                      <div class="m-2 p-2">
+                        <label class="text-white" for="">ชุดที่</label>
+                        <input type="text" class="form-control" [(ngModel)]="set_no">
+                        
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                      <button class="m-2 col-5" mat-raised-button color="primary" (click)="Search(last3digit,draw_no,set_no)">
+                        <mat-icon>search</mat-icon>&nbsp;Search
+                      </button>
+                      <button class="m-2" mat-raised-button color="primary" (click)="reset()">
+                        รีเซ็ต
                         <mat-icon>close</mat-icon>
-                    </button>
+                      </button>
+                    </div>
                     
-                </mat-form-field>
-                 
+                  </div>
                   
+                </div>
                 
-                <button  class="ms-2 text-bg-light" mat-raised-button color="primary"
-                 style="position:relative;height: 55px;" (click)="SearchLotterybyKeyword(keyword,value)"><mat-icon style="font-size: 20px;">search</mat-icon></button>
-            </span>
-           
+                
             
             
-            <span><p-toast></p-toast></span>
-            
+              
+          </div>
+          <span><p-toast></p-toast></span>
+
+  </div>
+  <div class="row justify-content-center align-item-center">
+    <ng-container *ngFor="let lottery of lotteries" >
+                  
+      <mat-card class="col-4 m-3 p-1" style="background-color: rgb(255, 242, 251);">
+        <div style=" position: relative;">
+          <span style="top: 0; left: 0; margin-left: 1em;"><img src="../../../assets/image/lottery_logo.gif" width="5%">&nbsp;&nbsp;สลากกินแบ่งรัฐบาล</span>
+        </div>
+        <div class="mt-2" style="display: flex; flex-direction: row; margin-left: 20px;">
+          <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 200, 212);">{{ lottery.lottery_number }}</span>
+          <span class="ms-2" style="font-size: 15px;">&nbsp;งวดที่ <br><span style="margin-left: 10px;">{{ lottery.draw_no }}</span></span>
+          <span class="ms-2" style="font-size: 15px;">&nbsp;ชุดที่ <br><span style="margin-left: 10px;">{{ lottery.set_no }}</span></span>
+          <span *ngIf="IsLoggedIn && user.roles=='member'" class="ms-4"><button mat-raised-button color="primary" (click)="addToCart(lottery)"  ><mat-icon>add</mat-icon> <mat-icon>shopping_cart</mat-icon></button></span>
+          <span *ngIf="!IsLoggedIn" class="ms-4"><button mat-raised-button color="primary" disabled>เลือก</button></span>
+        </div>
+        <div class="m-2" style="display: flex; flex-direction: row;justify-content: space-between;" >
+          <span style="font-size: 16px;">ร้าน Lotto Shop</span>
+          <span style="font-size: 16px;">ราคา {{lottery.price}} บาท</span>
         </div>
         
-        <div>
-          
          
-             <div class="row">
-               
-              
+      </mat-card>
 
-
-                <ng-container *ngFor="let lottery of lotteries">
-                  
-                  <mat-card class="col-4 m-3 p-1" style="background-color: rgb(255, 242, 251);">
-                    <div style=" position: relative;">
-                      <span style="top: 0; left: 0; margin-left: 1em;"><img src="../../../assets/image/lottery_logo.gif" width="5%">&nbsp;&nbsp;สลากกินแบ่งรัฐบาล</span>
-                    </div>
-                    <div class="mt-2" style="display: flex; flex-direction: row; margin-left: 20px;">
-                      <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 200, 212);">{{ lottery.lottery_number }}</span>
-                      <span class="ms-2" style="font-size: 15px;">&nbsp;งวดที่ <br><span style="margin-left: 10px;">{{ lottery.draw_no }}</span></span>
-                      <span class="ms-2" style="font-size: 15px;">&nbsp;ชุดที่ <br><span style="margin-left: 10px;">{{ lottery.set_no }}</span></span>
-                      <span *ngIf="IsLoggedIn" class="ms-4"><button mat-raised-button color="primary" (click)="addToCart(lottery)"  ><mat-icon>add</mat-icon> <mat-icon>shopping_cart</mat-icon></button></span>
-                      <span *ngIf="!IsLoggedIn" class="ms-4"><button mat-raised-button color="primary" disabled>เลือก</button></span>
-                    </div>
-                    <div class="m-2" style="display: flex; flex-direction: row;justify-content: space-between;" >
-                      <span style="font-size: 16px;">ร้านเด็กติดเกม</span>
-                      <span style="font-size: 16px;">ราคา {{lottery.price}} บาท</span>
-                    </div>
-                    
-                     
-                  </mat-card>
-
-                   
-                </ng-container>
-                
-                
-            </div>
-              
-        </div>
-          
-    
-    </div>
+       
+    </ng-container>
+  </div>
 </div>

@@ -41,6 +41,9 @@ import {MatTableModule} from '@angular/material/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import {  MatSnackBarModule } from '@angular/material/snack-bar';
+import { InsertLotteryComponent } from './dialog/insert-lottery/insert-lottery.component';
+import { HistoryPurchaseComponent } from './page/history-purchase/history-purchase.component';
+import { EditLotteryComponent } from './dialog/edit-lottery/edit-lottery.component';
 
 
 @NgModule({
@@ -57,7 +60,10 @@ import {  MatSnackBarModule } from '@angular/material/snack-bar';
     CartComponent,
     ProfileComponent,
     HomeComponent,
-    LotteryManageComponent
+    LotteryManageComponent,
+    InsertLotteryComponent,
+    HistoryPurchaseComponent,
+    EditLotteryComponent
   ],
   imports: [
     BrowserModule,

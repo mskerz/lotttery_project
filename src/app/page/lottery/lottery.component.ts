@@ -21,11 +21,12 @@ export class LotteryComponent {
   value:string = '';
   IsLoggedIn = false;
   user:any;
-  keywordOptions = [
-    { value: 'last3digit', label: '3 เลขท้าย' },
-    { value: 'draw_no', label: 'งวดที่' },
-    { value: 'set_no', label: 'ชุดที่' }
-  ];
+  digit_1='';
+  digit_2='';
+  digit_3='';
+  last3digit =(this.digit_1+this.digit_2+this.digit_3);
+  draw_no = 0;
+  set_no = 0;
   
 
   constructor(private title:Title,private lotteryService:LotteryService,private http:HttpClient,private router:Router,private message: MessageService,private CartService:CartService){
@@ -89,23 +90,35 @@ export class LotteryComponent {
     
   }
   noDataFound:boolean =false;
-  SearchLotterybyKeyword(keyword:string,vaule:string) {
-    if(keyword && vaule){
-      this.lotteryService.getLotteryFromKeyword(keyword,vaule).subscribe(data=>{
-        this.lotteries = lottery_covert.toLottery(JSON.stringify(data));
-        console.log(this.lotteries);
+
+  Search(digit_3last:string,draw_no:number,set_no:number){
+    this.last3digit = (this.digit_1.toString()+this.digit_2.toString()+this.digit_3.toString());
+    console.log(this.last3digit);
+      this.lotteryService.SearchLottery(digit_3last,draw_no,set_no).subscribe(data=>{
+        this.lotteries = data.map((item) => {
+          // แปลงข้อมูล JSON ให้อยู่ในรูปแบบที่คุณต้องการ
+          return {
+            idx: item.idx,
+            lottery_number: item.lottery_number.toString().padStart(6, '0'), // เติม 0 นำหน้าถ้ามีน้อยกว่า 6 หลัก
+            draw_no: item.draw_no,
+            set_no: item.set_no,
+            price: item.price,
+            lottery_quantity: item.lottery_quantity
+          };
+        });
         if (this.lotteries.length === 0) {
           this.showError();
         }
-      });
-
-    }else{
-      this.FetchData();
-    }
-
-    
-    
-  }
+       });
+  
+   }
+   reset(){
+    this.digit_1 = '';
+    this.digit_2 = '';
+    this.digit_3 = '';
+    this.draw_no = 0;
+    this.set_no = 0;
+   }
   
 
   showError() {

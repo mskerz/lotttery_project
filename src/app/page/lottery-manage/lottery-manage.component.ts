@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { InsertLotteryComponent } from 'src/app/dialog/insert-lottery/insert-lottery.component';
 import { Lottery } from 'src/app/model/lottery.model';
 import { LotteryService } from 'src/app/service/lottery.service';
 
@@ -9,13 +11,23 @@ import { LotteryService } from 'src/app/service/lottery.service';
 })
 export class LotteryManageComponent implements OnInit {
   lotteries = Array<Lottery>();
-   constructor(private lotteryService: LotteryService){
+   constructor(private lotteryService: LotteryService,private dialog:MatDialog){
     
   }
   ngOnInit(){
     this.fetchLottery();
   }
-
+  openInsert(){
+       this.dialog.open(InsertLotteryComponent,{
+        minWidth: '300px'
+      }).afterClosed().subscribe(result=>{
+        if(result){
+          console.log('รับค่าจาก InsertLotteryComponent:', result);
+        }
+      })
+       
+       
+  }
   alert(){
     window.alert(" แก้ไข และ ลบ ")
   }
@@ -33,7 +45,7 @@ export class LotteryManageComponent implements OnInit {
         };
 
       });
-      console.log(this.lotteries);
+      
     });
   }
 }

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark"  >
   <div class="container-fluid">
-    <a class="navbar-brand" href="">{{ title }}</a>
+    <a class="navbar-brand" href="/"> {{ title }} </a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li *ngIf="!isLoggedIn" class="nav-item">
@@ -12,15 +12,15 @@
               <a class="nav-link active" aria-current="page" href="/member/lottery">ค้นหาสลาก</a>
             </li>
             <li *ngIf="IsAdmin" class="nav-item">
-              <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="menu">จัดการ</button>
-              <mat-menu  #menu="matMenu">
+              <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="admin_menu">จัดการ</button>
+              <mat-menu  #admin_menu="matMenu">
                 <button mat-menu-item>
-                  <mat-icon>search</mat-icon>
-                  <a href="/admin/lottery" style="color: rgb(0, 0, 0); text-decoration: none;"><span >ค้นหาสลาก</span></a>
+                  
+                  <a routerLink="/admin/lottery" style="color: rgb(0, 0, 0); text-decoration: none;"> <mat-icon>search</mat-icon>ค้นหาสลาก</a>
                 </button>
                 <button mat-menu-item>
-                  <mat-icon>edit</mat-icon>
-                  <a href="/admin/lottery/manage" style="color: rgb(0, 0, 0); text-decoration: none;"><span >จัดการสลาก</span></a>
+                  
+                  <a routerLink="/admin/lottery/manage" style="color: rgb(0, 0, 0); text-decoration: none;"><mat-icon>edit</mat-icon>จัดการสลาก</a>
                 </button>
               
               </mat-menu>
@@ -29,7 +29,7 @@
 
       </ul>
       <ul class="nav navbar-nav  " style="margin-left: auto; display: flex; flex-direction: row;">
-        <div *ngIf="!isLoggedIn" class="d-inline-flex">
+        <div *ngIf="isLoggedIn==false" class="d-inline-flex">
             <li >
               <button routerLink="/login" class="  btn" style="color: white; text-decoration: none;" >เข้าสู่ระบบ</button>
             </li>

@@ -6,7 +6,7 @@
     <p-table class="table-responsive" [value]="lotteries" [rows]="6"  [paginator]="true" [paginatorPosition]="'bottom'">
         <ng-template pTemplate="caption"   style="font-family: 'Prompt', sans-serif !important;"> รายการสลากกินแบ่งรํฐบาล   
            <div class="mb-3">
-            <button mat-raised-button color="primary" >เพิ่มสลากเข้าสู่ระบบ<mat-icon>add</mat-icon></button>
+            <button mat-raised-button color="primary" (click)="openInsert()" >เพิ่มสลากเข้าสู่ระบบ<mat-icon>add</mat-icon></button>
            </div>
         
         </ng-template>

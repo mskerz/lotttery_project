@@ -11,7 +11,7 @@ import { CartService } from 'src/app/service/cart.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  title = 'ร้านเด็กติดเกม'
+  title = 'Lotto Shop'
   isLoggedIn: boolean = false; // กำหนดตัวแปรเพื่อตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
   current_user = localStorage.getItem('currentUser');
   IsAdmin:boolean=false;
