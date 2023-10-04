@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator } from '@angular/forms';
+import { EmailValidator, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Convert as memberCovert,Member } from 'src/app/model/member.model';
 import { AuthService } from 'src/app/service/auth.service';
 import Swal from 'sweetalert2';
-  
+import { MyErrorStateMatcher as ErrorMatcher } from '../login/login.component';  
 
 
 
@@ -18,7 +19,8 @@ import Swal from 'sweetalert2';
   
 })
 export class RegisterComponent implements OnInit {
- 
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  email_matcher = new ErrorMatcher();
   members = Array<Member>();
   Current_member: any;
   hide = true;
@@ -34,7 +36,7 @@ export class RegisterComponent implements OnInit {
     
   
 
-  constructor(private auth:AuthService,private http:HttpClient,private router:Router,private title:Title) {
+  constructor(private auth:AuthService,private http:HttpClient,private router:Router,private title:Title,private snackbar:MatSnackBar) {
      
   } 
   ngOnInit() {
@@ -59,7 +61,7 @@ export class RegisterComponent implements OnInit {
     let IsNotEmpty = this.email && this.password && this.fullname && this.birthdate && this.phone_no;
      if (  IsNotEmpty) {
       // ดึงข้อมูลอีเมลจาก API
-      this.auth.getEmail(this.email).subscribe((data) => {
+      this.auth.getMember().subscribe((data) => {
         // แปลงข้อมูล JSON ที่ได้มาเป็นออบเจ็กต์
         this.members = memberCovert.toMembers(JSON.stringify(data));
         // ตรวจสอบว่าอีเมลซ้ำหรือไม่
@@ -79,25 +81,38 @@ export class RegisterComponent implements OnInit {
             console.log(res.status);
             console.log(res.body);
             console.log("Register Successfully!");
-            console.log("ทดลองเรียกข้อมูลจากemail มาเก็บใน localstorage");
-            this.http.get(this.auth.api_endpoint+"/member/"+this.email).subscribe((data:any) => {
-                console.log(data.user_id);
-              //set storage
-               let user_current = {
-                user_id : data.user_id,
-                email: this.email,
-                fullname:this.fullname,
-                birthdate :this.birthdate,
-                phone_no :this.phone_no
+            this.auth.OnLogin(this.email, this.password).subscribe((response:any) => {
+              // ดำเนินการหลังจากเข้าสู่ระบบสำเร็จ
+              console.log('เข้าสู่ระบบสำเร็จ', response);
+              console.log('User ID:', response.user_id);
+            
+              if(response.roles=="admin"){
+                setTimeout(() => {
+                  this.router.navigate(['/admin/lottery']);
+                }, 2000);
+              }else{
+                setTimeout(() => {
+                  this.router.navigate(['/member/lottery']);
+                }, 2000);
               }
-              localStorage.setItem('currentUser', JSON.stringify(user_current));
-               
-           });
+              localStorage.setItem('currentUser', JSON.stringify(response));
+             
+              // คุณสามารถนำผลลัพธ์ไปทำอย่างอื่น ๆ ที่คุณต้องการที่นี่
+            },
+            (error) => {
+              // จัดการข้อผิดพลาดเมื่อเข้าสู่ระบบไม่สำเร็จ
+              console.error('เข้าสู่ระบบล้มเหลว', error);
+               // กำหนดข้อความข้อผิดพลาด
+              this.snackbar.open('เข้าสู่ระบบล้มเหลว กรุณาตรวจสอบอีเมลและรหัสผ่านของคุณ', 'ปิด', {
+                duration: 5000, // ระยะเวลาที่ Snackbar แสดง (5 วินาที)
+            });
+              
+            }
+        );
              
             // localStorage.setItem('currentUser', JSON.stringify(JSON_Object));
             // console.log("Success");
-            this.router.navigate(['/member']);
-            
+             
 
             
           });

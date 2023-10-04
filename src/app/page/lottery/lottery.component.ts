@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { LocationStrategy } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 import { CartService } from 'src/app/service/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lottery',
@@ -101,10 +102,11 @@ export class LotteryComponent {
   
 
   showError() {
-    this.message.add({
-       severity: 'error',
-       summary: 'ไม่พบสลากที่ค้นหา',
-       detail: 'กรุณาทำการค้นหาอีกครั้ง' });
+    Swal.fire({
+      icon: 'error',
+      title:'แจ้งเตือน',
+      text:'ไม่พบหมายเลขสลากที่คุณค้นหา'
+    })
   }
 
   addToCart(lottery:Lottery){

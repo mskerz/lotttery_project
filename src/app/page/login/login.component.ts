@@ -62,9 +62,7 @@ export class LoginComponent implements OnInit {
   }
    login() {
     if(this.email&&this.password){
-      this.auth.OnLogin(this.email, this.password)
-      .subscribe(
-        (response:any) => {
+      this.auth.OnLogin(this.email, this.password).subscribe((response:any) => {
           // ดำเนินการหลังจากเข้าสู่ระบบสำเร็จ
           console.log('เข้าสู่ระบบสำเร็จ', response);
           console.log('User ID:', response.user_id);

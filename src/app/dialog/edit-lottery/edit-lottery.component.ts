@@ -37,6 +37,7 @@ export class EditLotteryComponent {
             icon: "success"
           });
           console.log(res);
+          this.close();
           // ทำอื่นๆ ที่คุณต้องการหลังจากการอัปเดตสำเร็จ
         },
         (error) => {

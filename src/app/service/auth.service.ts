@@ -42,7 +42,7 @@ export class AuthService implements OnInit {
   OnLogin(email:string, password:string){
     return this.http.post(this.api_endpoint+"/member/login",{email,password});
   }
-  getEmail(email:string){
+  getMember(){
     return this.http.get(this.api_endpoint+"/members");
   }
   Logout(){
