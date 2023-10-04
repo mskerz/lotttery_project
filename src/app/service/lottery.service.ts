@@ -11,7 +11,7 @@ export class LotteryService {
   
   cart:Lottery[]=[];
   response:any;
-
+  lotteries:any;
   private lotteryUpdateSubject = new Subject<void>();
   public lotteryUpdated = this.lotteryUpdateSubject.asObservable();
   constructor(private http:HttpClient) { }
@@ -24,7 +24,25 @@ export class LotteryService {
     
     return this.http.get<any[]>(this.api_endpoint+"/lotteries");
   }
-  SearchLottery(last3digit: string,draw_no: number,set_no: number){
-    return this.http.get<any[]>(this.api_endpoint+"/lottery/search/"+last3digit+"/"+draw_no+"/"+set_no);
+  
+  getLotteryFromKeyword(keyword:string,vaule:string){
+    return this.http.get<any[]>(this.api_endpoint+"/lottery/"+keyword+"/"+vaule);
+  }
+  SearchBylast3digit(last3digit: string){
+    
+
+  }
+  SearchByDrawNumber(draw_no:number){
+
+
+  }
+  SearchBySetNumber(set_no:number){
+
+   }
+
+  
+
+  delete(idx: number){
+    return this.http.delete(this.api_endpoint+"/lottery/delete/"+idx);
   }
 }

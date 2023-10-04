@@ -3,61 +3,54 @@
   <div class="d-flex justify-content-center align-item-center">
           <div class="p-2 ">
               <p class="text-center text-success" style="font-size: 30px;">ค้นหาสลาก</p>
-              <div class="d-flex flex-row" >
               
-                  <div class="m-2">
-                      <input type="text" class="form-control text-center input-size" disabled value="-"  size="1" >
-          
-                  </div>
-                  <div class="m-2">
-                      <input type="text" class="form-control text-center input-size" disabled value="-" size="1" >
-                  </div>
-                  <div class="m-2">
-                      <input type="text" class="form-control text-center input-size" disabled value="-"  size="1" >
-          
-                  </div>
-                  <div class="m-2">
-                      <input type="number" class="form-control input-size" size="1" maxlength="1" [(ngModel)]="digit_1"  max="9" min="0">
-          
-                  </div>
-                  <div class="m-2">
-                      <input type="number" class="form-control input-size"  size="1" maxlength="1"  [(ngModel)]="digit_2" max="9" min="0">
-                  </div>
-                  <div class="m-2">
-                      <input type="number" class="form-control input-size" size="1" maxlength="1"  [(ngModel)]="digit_3"  max="9" min="0">
-                  </div>
-          
-              </div>
-              <input type="hidden" [(ngModel)]="last3digit">
               
               <div class="d-flex justify-content-center align-items-center">
-                  <div class="d-flex flex-column">
-                    
-                    <div class="d-flex flex-row m-3">
-                      <div class="m-2 p-2">
-                        <label class="text-white" for="">งวดที่</label>
-                        <input type="text" class="form-control" [(ngModel)]="draw_no"  >
-                      </div>
-                      <div class="m-2 p-2">
-                        <label class="text-white" for="">ชุดที่</label>
-                        <input type="text" class="form-control" [(ngModel)]="set_no">
-                        
-                      </div>
-                      
+                
+                <div class="d-inline-flex">
+                      <span   style="display: flex;flex-direction: row;"   > 
+                  <mat-form-field   class="col-2" style="margin-right: 10px;" >
+                    <mat-label>คำค้นหา</mat-label>
+                    <mat-select  [(ngModel)]="keyword"  >
+                      <mat-option value="last3digit" class="active"> 3 เลขท้าย</mat-option>
+                      <mat-option value="draw_no"> งวดที่ </mat-option>
+                      <mat-option value="set_no"> ชุดที่ </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="d-flex flex-row"  *ngIf="keyword==='last3digit'" >
+              
+                    <div class="m-2">
+                      <input type="number" class="form-control input-size" size="1" maxlength="1" [(ngModel)]="digit_1"  max="9" min="0">
+            
                     </div>
-                    <div class="d-flex flex-row justify-content-center align-items-center">
-                      <button class="m-2 col-5" mat-raised-button color="primary" (click)="Search(last3digit,draw_no,set_no)">
-                        <mat-icon>search</mat-icon>&nbsp;Search
-                      </button>
-                      <button class="m-2" mat-raised-button color="primary" (click)="reset()">
-                        รีเซ็ต
-                        <mat-icon>close</mat-icon>
-                      </button>
+                    <div class="m-2">
+                        <input type="number" class="form-control input-size"  size="1" maxlength="1"  [(ngModel)]="digit_2" max="9" min="0">
                     </div>
-                    
-                  </div>
+                    <div class="m-2">
+                      <input type="number" class="form-control input-size" size="1" maxlength="1"  [(ngModel)]="digit_3"  max="9" min="0">
+                      <input type="hidden" *ngIf="keyword==='last3digit'" value="{{last3digit}}" [(ngModel)]="value" >
+                    </div>
                   
+          
                 </div>
+                  <mat-form-field class="col-5"  color="primary"   *ngIf="keyword!='last3digit'"    >
+                      
+                       <input matInput  size="20px"    placeholder="keyword"  [(ngModel)]="value"    >
+                      <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                          <mat-icon>close</mat-icon>
+                      </button>
+                      
+                      
+                  </mat-form-field>
+                   
+                    
+                  
+                  <button  class="ms-2 text-bg-dark" mat-raised-button color="primary"
+                   style="position:relative;height: 55px;" (click)="SearchLotterybyKeyword(keyword,value)"><mat-icon style="font-size: 20px;">search</mat-icon></button>
+              </span>
+                  
+                </div>  
+              </div>
                 
                 
             
