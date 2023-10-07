@@ -69,9 +69,9 @@ export class RegisterComponent implements OnInit {
         
         if (isEmailDuplicate) {
           Swal.fire({
+            icon: 'warning',
             title: 'แจ้งเตือน',
             text: 'อีเมล์นี้มีผู้ใช้งานแล้ว',
-            timer:2000,
           })
         } else {
           // ถ้าไม่ซ้ำให้ทำการลงทะเบียน
@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
                 }, 2000);
               }else{
                 setTimeout(() => {
-                  this.router.navigate(['/member/lottery']);
+                  this.router.navigate(['/member/lottery']);  //dashboard 
                 }, 2000);
               }
               localStorage.setItem('currentUser', JSON.stringify(response));

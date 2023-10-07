@@ -44,6 +44,10 @@ import {  MatSnackBarModule } from '@angular/material/snack-bar';
 import { InsertLotteryComponent } from './dialog/insert-lottery/insert-lottery.component';
 import { HistoryPurchaseComponent } from './page/history-purchase/history-purchase.component';
 import { EditLotteryComponent } from './dialog/edit-lottery/edit-lottery.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 @NgModule({
@@ -63,7 +67,8 @@ import { EditLotteryComponent } from './dialog/edit-lottery/edit-lottery.compone
     LotteryManageComponent,
     InsertLotteryComponent,
     HistoryPurchaseComponent,
-    EditLotteryComponent
+    EditLotteryComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +99,8 @@ import { EditLotteryComponent } from './dialog/edit-lottery/edit-lottery.compone
     MatTableModule,
     DropdownModule,
     InputTextModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule,MatToolbarModule,SidebarModule
    ],
   providers: [Title],
   bootstrap: [AppComponent]

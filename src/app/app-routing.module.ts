@@ -9,6 +9,7 @@ import { MemberComponent } from './page/member/member.component';
 import { AdminComponent } from './page/admin/admin.component';
 import { HomeComponent } from './page/home/home.component';
 import { LotteryManageComponent } from './page/lottery-manage/lottery-manage.component';
+import { DashboardComponent } from './page/dashboard/dashboard.component';
 
 const routes: Routes = [
  
@@ -17,7 +18,7 @@ const routes: Routes = [
     {path: 'lottery', component:LotteryComponent},
     {path: 'login', component:LoginComponent,data:{title: 'Login'}},
     {path: 'register', component:RegisterComponent},
-    {path:'admin', component:AdminComponent,title: 'Admin'},
+    {path:'admin/dashboard', component:DashboardComponent,title: 'Admin Dashboard'},
     {path:'admin/lottery',component:LotteryComponent},
     {path:'admin/lottery/manage',component:LotteryManageComponent},
     {path: 'member', component:MemberComponent,title:'Member Profile'},

@@ -121,7 +121,7 @@ export class LotteryComponent {
     if(keyword==='last3digit'){
       this.value = this.last3digit;
       console.log(this.value);
-    }
+    } 
     if(keyword&&vaule){
       this.lotteryService.getLotteryFromKeyword(keyword,vaule).subscribe((data)=>{
         this.lotteries = data.map((item) => {

@@ -16,6 +16,7 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
+
           "options": {
             "outputPath": "dist/lotttery_project",
             "index": "src/index.html",
@@ -39,6 +40,9 @@
             ],
             "scripts": [
               "node_modules/sweetalert2/dist/sweetalert2.all.min.js",
+            ],
+            "allowedCommonJsDependencies": [
+              "sweetalert2",
             ]
           },
           "configurations": {

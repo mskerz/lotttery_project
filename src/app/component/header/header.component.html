@@ -2,28 +2,34 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/"> {{ title }} </a>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav ">
         <li *ngIf="!isLoggedIn" class="nav-item">
           <a class="nav-link active" aria-current="page" href="/lottery">ค้นหาสลาก</a>
         </li>
         <div *ngIf="isLoggedIn">
-        
+          
             <li *ngIf="!IsAdmin" class="nav-item">
               <a class="nav-link active" aria-current="page" href="/member/lottery">ค้นหาสลาก</a>
             </li>
-            <li *ngIf="IsAdmin" class="nav-item">
-              <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="admin_menu">จัดการ</button>
-              <mat-menu  #admin_menu="matMenu">
-                <button mat-menu-item>
-                  
-                  <a routerLink="/admin/lottery" style="color: rgb(0, 0, 0); text-decoration: none;"> <mat-icon>search</mat-icon>ค้นหาสลาก</a>
-                </button>
-                <button mat-menu-item>
-                  
-                  <a routerLink="/admin/lottery/manage" style="color: rgb(0, 0, 0); text-decoration: none;"><mat-icon>edit</mat-icon>จัดการสลาก</a>
-                </button>
+            <li *ngIf="IsAdmin" class="nav-item ">
+              <div class="d-flex flex-row">
+                <button class="nav-link" ><a  routerLink="/admin/dashboard" style="color: white;text-decoration: none;">แดชบอร์ด</a></button>
+                <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="admin_menu">จัดการ</button>
+                <mat-menu  #admin_menu="matMenu">
+                  <button mat-menu-item>
+                    
+                    <a routerLink="/admin/lottery" style="color: rgb(0, 0, 0); text-decoration: none;"> <mat-icon>search</mat-icon>ค้นหาสลาก</a>
+                  </button>
+                  <button mat-menu-item>
+                    
+                    <a routerLink="/admin/lottery/manage" style="color: rgb(0, 0, 0); text-decoration: none;"><mat-icon>edit</mat-icon>จัดการสลาก</a>
+                  </button>
+                
+                </mat-menu>
+
+              </div>
               
-              </mat-menu>
+
             </li>
         </div>
 

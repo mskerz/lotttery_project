@@ -1,0 +1,63 @@
+<p-sidebar [(visible)]="sidebarVisible1" position="left">
+    <h3>&nbsp;Admin Profile&nbsp;<mat-icon>admin</mat-icon></h3>
+</p-sidebar>
+<button (click)="sidebarVisible1=true" mat-icon-button color="accent"><mat-icon>menu</mat-icon> </button>
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+         รายงานการซื้อ
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5>รายการสั่งซื้อล่าสุด</h5>
+          </div>
+          <div class="card-body">
+            <p-table [value]="order">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Order ID</th>
+                  <th>ชื่อผู้ใช้</th>
+                  <th>วันที่สั่งซื้อ</th>
+                  <th>ราคาที่สั่งซื้อทั้งหมด</th>
+                  <!-- เพิ่มหัวข้อคอลัมน์อื่น ๆ ตามที่ต้องการ -->
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-order>
+                <tr>
+                  <td>{{ order.order_id }}</td>
+                  <td>{{ order.fullname }}</td>
+                  <td>{{ order.purchase_date  }}</td>
+                  <td>{{order.total_order_price}} บาท  <button color="primary" mat-button (click)="toggleOrderDetails(order.order_id)">รายละเอียด</button></td>
+                  
+                  <!-- แสดงข้อมูลอื่น ๆ ตามที่ต้องการ -->
+                </tr>
+                <tr *ngIf="orderDetailsVisible[order.order_id]">
+                    <td colspan="4">
+                      <!-- แสดงรายละเอียด lotteries ของ order นี้ที่คุณต้องการ -->
+                      <!-- ใช้ ngFor วนลูป lotteries ที่อยู่ใน order.orders -->
+                      <ul>
+                        <li *ngFor="let lottery of order.orders">
+                          หมายเลขสลาก: {{ lottery.lottery_number }},
+                          จำนวนที่สั่ง: {{ lottery.quantity_order }},
+                          ราคาต่อใบ: {{ lottery.price }},
+                          ราคารวม: {{ lottery.total_price }} บาท
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+              </ng-template>
+            </p-table>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  

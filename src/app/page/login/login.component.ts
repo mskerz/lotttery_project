@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
           this.isLoggedIn = true;
           if(response.roles=="admin"){
             setTimeout(() => {
-              this.route.navigate(['/admin/lottery']);
+              this.route.navigate(['/admin/dashboard']);
             }, 2000);
           }else{
             setTimeout(() => {
