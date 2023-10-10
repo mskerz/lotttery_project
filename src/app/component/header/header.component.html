@@ -49,19 +49,22 @@
               <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
               <a   style="color: white;text-decoration: none;" mat-button (click)="OpenCart()">
                   <mat-icon >shopping_cart</mat-icon>ตะกร้า
-                  <p-badge [value]="cartItemCount.toString()" severity="info" [hidden]="IsCartEmpty()"></p-badge>
+                  <p-badge [value]="'+' + cartItemCount.toString()" severity="danger" [hidden]="IsCartEmpty()"></p-badge>
                 </a>
               <a style="color: white;text-decoration: none;" routerLink="#" mat-button [matMenuTriggerFor]="history_menu"><mat-icon>history</mat-icon></a>
               <mat-menu #history_menu="matMenu">
-                  <button mat-button>ประวัติการซื้อสลาก</button>
+                  <button mat-button><a [routerLink]="['/member/lottery/history', user.user_id]"
+                  routerLinkActive="router-link-active"  style="color: rgb(0, 0, 0); text-decoration: none;" >ประวัติการซื้อสลาก</a></button>
               </mat-menu>
+              
+
               <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
               <mat-menu  #menu="matMenu">
-                <button mat-menu-item>
+                <!-- <button mat-menu-item>
                   <i class="pi pi-user"  ></i>
                   <a routerLink="/member" style="color: rgb(0, 0, 0); text-decoration: none;"><span >&nbsp;&nbsp;โปรไฟล์ของคุณ</span></a>
-                </button>
-                
+                </button> -->
+                <div class="container"><p>สวัสดีคุณ {{user.fullname}}</p></div>
                 <button mat-menu-item>
                   <mat-icon>logout</mat-icon>
                   <a routerLink="/login" style="color: rgb(0, 0, 0); text-decoration: none;" (click)="Logout()"><span>ออกจากระบบ</span></a>
@@ -74,12 +77,13 @@
           <li *ngIf="IsAdmin">
             <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
             <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
+            <p>ยินดีต้อนรับคุณ {{user.fullname}}</p>
             <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
             <mat-menu  #menu="matMenu">
-              <button mat-menu-item>
+              <!-- <button mat-menu-item>
                 <mat-icon>account_circle</mat-icon>
                 <a routerLink="/admin" style="color: rgb(0, 0, 0); text-decoration: none;"><span >โปรไฟล์ของคุณ</span></a>
-              </button>
+              </button> -->
               
               <button mat-menu-item>
                 <mat-icon>logout</mat-icon>

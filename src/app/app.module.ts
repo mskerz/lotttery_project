@@ -7,8 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
 import { AdminComponent } from './page/admin/admin.component';
-import { MemberComponent } from './page/member/member.component';
-import { MainComponent } from './page/main/main.component';
+ import { MainComponent } from './page/main/main.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 
@@ -48,7 +47,9 @@ import { DashboardComponent } from './page/dashboard/dashboard.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { SidebarModule } from 'primeng/sidebar';
-
+import { HistoryOrderComponent } from './member/history-order/history-order.component';
+import { ButtonModule } from 'primeng/button';
+import { CardComponent } from './component/card/card.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,6 @@ import { SidebarModule } from 'primeng/sidebar';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    MemberComponent,
     MainComponent,
     HeaderComponent,
     FooterComponent,
@@ -68,7 +68,9 @@ import { SidebarModule } from 'primeng/sidebar';
     InsertLotteryComponent,
     HistoryPurchaseComponent,
     EditLotteryComponent,
-    DashboardComponent
+    DashboardComponent,
+    HistoryOrderComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,7 @@ import { SidebarModule } from 'primeng/sidebar';
     DropdownModule,
     InputTextModule,
     MatSnackBarModule,
-    MatSidenavModule,MatToolbarModule,SidebarModule
+    MatSidenavModule,MatToolbarModule,SidebarModule,ButtonModule
    ],
   providers: [Title],
   bootstrap: [AppComponent]

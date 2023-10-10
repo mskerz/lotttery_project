@@ -1,0 +1,105 @@
+<div class="container bg-white p-3 rounded-2" style="margin-top: 30px;">
+    
+    <div class="d-flex flex-row">
+        <h3><mat-icon>history</mat-icon> ข้อมูลการซื้อย้อนหลัง</h3>
+        
+    </div>
+    <div class="row">
+        
+        <p-table   class="table-responsive"   [value]="history_orders" 
+        [rows]="6"  [paginator]="true" [paginatorPosition]="'bottom'"
+                 
+
+        >
+            <ng-template  pTemplate="caption">
+                
+                <div class="flex align-items-center">
+                    <input pInputText type="text" [(ngModel)]="searchQuery" placeholder="Search by Lottery Number" />
+                    <input pInputText class="ms-3" type="date" [(ngModel)]="searchDate" placeholder="Search by Purchase Date (yyyy-MM-dd)" />
+                    <button mat-raised-button  class="ms-2" color="primary"  (click)="applyFilters()">ค้นหา</button>
+                    <button  mat-button  class="ms-3" (click)="clear()"><mat-icon>clear</mat-icon></button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        <div class="flex align-items-center">
+                            วันที่ซื้อ
+                         </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            ชื่อ - นามสกุล
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            หมายเลขสลาก
+                         </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            จำนวน
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            ราคาต่อใบ
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            ราคารวม (บาท)
+                        </div>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-orders>
+                <tr>
+                    <td>{{orders.purchase_date}}</td>
+                    <td>{{orders.fullname}}</td>
+                     <td>{{orders.lottery_number}}  <!--a  mat-button color="primary" (click)="toggleOrderDetails(orders.order_id)">ดูรายละเอียด</a--></td>
+                     <td>{{orders.quantity_order}}</td>
+                     <td>{{orders.price}}</td>
+                     <td>{{orders.total_price}}</td>
+                </tr>
+                
+                <!-- <tr *ngIf="orderDetailsVisible[orders.order_id]">
+                    <td colspan="4">
+                       
+                        <div class="container">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">รายละเอียดคำสั่ง</h5>
+                                <table class="table table-striped">
+                                  <thead>
+                                    <tr>
+                                      <th>หมายเลขสลาก</th>
+                                      <th>จำนวนที่สั่ง</th>
+                                      <th>ราคาต่อใบ</th>
+                                      <th>ราคารวม</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let lottery of orders.orders">
+                                      <td>{{ lottery.lottery_number }}</td>
+                                      <td>{{ lottery.quantity_order }} ใบ</td>
+                                      <td>{{ lottery.price }} บาท</td>
+                                      <td>{{ lottery.total_price }} บาท</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                    </td>
+                </tr> -->
+            </ng-template>
+            
+            
+        
+        
+        
+        </p-table>
+    </div>
+</div>

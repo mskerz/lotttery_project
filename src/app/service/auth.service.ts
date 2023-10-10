@@ -18,6 +18,7 @@ export class AuthService implements OnInit {
     
   }
 
+   
   IsLoggedIn():boolean {
      
     const current_user = localStorage.getItem('currentUser');

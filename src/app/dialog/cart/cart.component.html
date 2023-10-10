@@ -21,21 +21,24 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-lottery  >
+            
             <tr >
-              <td>{{ lottery.lottery_number }}</td>
+              <td><span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 223, 230);">{{ lottery.lottery_number }}</span></td>
               <td>{{ lottery.draw_no }}</td>
               <td>{{ lottery.set_no }}</td>
               <td>{{ lottery.price }} บาท</td>
               <td>{{ lottery.price * lottery.lottery_quantity }}</td>
-              <td style="display: block">
-                <a (click)="incrementQ(lottery)" mat-icon-button
+              <td class="text-center" >
+ 
+                <a (click)="incrementQ(lottery)" mat-icon-button style="color:  rgb(0, 178, 0);"
                   ><mat-icon>add</mat-icon></a
                 >
                 {{ lottery.lottery_quantity }}
-                <a (click)="decrementQ(lottery)" mat-icon-button
+                <a (click)="decrementQ(lottery)" mat-icon-button style="color: rgb(210, 13, 13);"
                   ><mat-icon>remove</mat-icon></a
                 >
               </td>
+              <td><a  (click)="removeItem(lottery)" mat-icon-button><mat-icon>delete</mat-icon></a></td>
                
             </tr>
             
@@ -62,6 +65,7 @@
           class="me-auto"
           mat-raised-button
           color="accent"
+          
           (click)="close()"
         >
           <mat-icon>chevron_left</mat-icon> แล้วค่อยซื้อทีหลัง</a
@@ -79,7 +83,7 @@
           style="float: right"
           class="ms-2"
           mat-raised-button
-          color="primary"
+          color="primary" (click)="confirmOrder()"
           >ยืนยันคำสั่งซื้อ
         </a>
         </div>

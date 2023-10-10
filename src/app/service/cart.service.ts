@@ -32,6 +32,7 @@ export class CartService {
   getCart(): Lottery[] {
     return this.cart;
   }
+ 
   RemoveItemFromCart(item: Lottery) {
     const index = this.cart.indexOf(item);
     if (index !== -1) {

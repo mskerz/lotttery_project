@@ -57,7 +57,7 @@ export class LotteryComponent {
 
   }
   ngOnInit(): void {
-    this.title.setTitle('Lotterie Shop Search')
+    this.title.setTitle('Search')
      
      this.FetchData;
      if(this.IsLoggedIn){

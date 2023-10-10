@@ -13,8 +13,8 @@ import { CartService } from 'src/app/service/cart.service';
 export class HeaderComponent implements OnInit {
   title = 'Lotto Shop'
   isLoggedIn: boolean = false; // กำหนดตัวแปรเพื่อตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
-  current_user = localStorage.getItem('currentUser');
   IsAdmin:boolean=false;
+  user:any;
   cartItemCount: number = 0;
 
    
@@ -24,14 +24,15 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
     // ตรวจสอบว่ามีข้อมูลผู้ใช้ใน localStorage หรือไม่
-    
-    if (this.current_user) {
+    const current_user = localStorage.getItem('currentUser');
+
+    if (current_user) {
       
-      let user = JSON.parse(this.current_user);
+      this.user = JSON.parse(current_user);
       this.isLoggedIn = true;
       
        
-      if(user.roles=="admin"){
+      if(this.user.roles=="admin"){
         this.IsAdmin = true;
       }
       this.cartItemCount = this.cartService.getCart().length;
