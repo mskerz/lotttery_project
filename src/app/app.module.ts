@@ -50,6 +50,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { HistoryOrderComponent } from './member/history-order/history-order.component';
 import { ButtonModule } from 'primeng/button';
 import { CardComponent } from './component/card/card.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,7 @@ import { CardComponent } from './component/card/card.component';
     DropdownModule,
     InputTextModule,
     MatSnackBarModule,
-    MatSidenavModule,MatToolbarModule,SidebarModule,ButtonModule
+    MatSidenavModule,MatToolbarModule,SidebarModule,ButtonModule,CalendarModule
    ],
   providers: [Title],
   bootstrap: [AppComponent]

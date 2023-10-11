@@ -34,7 +34,7 @@
             
                     </div>
                     <mat-form-field class="col-5"  color="primary"   *ngIf="keyword!='last3digit'"    >
-                        
+ 
                         <input matInput  size="20px"    placeholder="keyword"  [(ngModel)]="value"  value=""   >
                         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                             <mat-icon>close</mat-icon>
@@ -61,12 +61,12 @@
   <div class="row justify-content-center align-item-center">
     <ng-container *ngFor="let lottery of lotteries" >
                   
-      <mat-card class="col-4 m-3 p-1" style="background-color: rgb(255, 242, 251);">
+      <mat-card class="col-4 m-3 p-1" style="background-color: rgb(232, 255, 253);">
         <div style=" position: relative;">
           <span style="top: 0; left: 0; margin-left: 1em;"><img src="../../../assets/image/lottery_logo.gif" width="5%">&nbsp;&nbsp;สลากกินแบ่งรัฐบาล</span>
         </div>
         <div class="mt-2" style="display: flex; flex-direction: row; margin-left: 20px;">
-          <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(255, 200, 212);">{{ lottery.lottery_number }}</span>
+          <span class="rounded-1 p-1" style="font-size: 35px; background-color: rgb(182, 225, 255);">{{ lottery.lottery_number }}</span>
           <span class="ms-2" style="font-size: 15px;">&nbsp;งวดที่ <br><span style="margin-left: 10px;">{{ lottery.draw_no }}</span></span>
           <span class="ms-2" style="font-size: 15px;">&nbsp;ชุดที่ <br><span style="margin-left: 10px;">{{ lottery.set_no }}</span></span>
           <span *ngIf="IsLoggedIn && user.roles=='member'" class="ms-4"><button mat-raised-button color="primary" (click)="addToCart(lottery)"  ><mat-icon>add</mat-icon> <mat-icon>shopping_cart</mat-icon></button></span>

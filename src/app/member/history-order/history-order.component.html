@@ -55,7 +55,7 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-orders>
-                <tr>
+                <tr *ngIf="orders">
                     <td>{{orders.purchase_date}}</td>
                     <td>{{orders.fullname}}</td>
                      <td>{{orders.lottery_number}}  <!--a  mat-button color="primary" (click)="toggleOrderDetails(orders.order_id)">ดูรายละเอียด</a--></td>
@@ -63,8 +63,28 @@
                      <td>{{orders.price}}</td>
                      <td>{{orders.total_price}}</td>
                 </tr>
+                 
+                 
                 
-                <!-- <tr *ngIf="orderDetailsVisible[orders.order_id]">
+               
+            </ng-template>
+            <ng-template pTemplate="emptymessage" *ngIf="history_orders.length===0" style="padding: 200px;" >
+                <tr >
+                    <td colspan="6" class="text-center" >ไม่มีข้อมูลการซื้อสลากย้อนหลัง</td>
+                </tr>
+            </ng-template>
+        
+            
+        
+           
+        
+        </p-table>
+       
+    </div>
+</div>
+
+
+ <!-- <tr *ngIf="orderDetailsVisible[orders.order_id]">
                     <td colspan="4">
                        
                         <div class="container">
@@ -94,12 +114,3 @@
                           </div>
                     </td>
                 </tr> -->
-            </ng-template>
-            
-            
-        
-        
-        
-        </p-table>
-    </div>
-</div>

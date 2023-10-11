@@ -13,7 +13,7 @@
             </li>
             <li *ngIf="IsAdmin" class="nav-item ">
               <div class="d-flex flex-row">
-                <button class="nav-link" ><a  routerLink="/admin/dashboard" style="color: white;text-decoration: none;">แดชบอร์ด</a></button>
+                <button class="nav-link" ><a  routerLink="/admin/dashboard" style="color: white;text-decoration: none;">รายงานการซื้อ</a></button>
                 <button class="nav-link active" aria-current="page" [matMenuTriggerFor]="admin_menu">จัดการ</button>
                 <mat-menu  #admin_menu="matMenu">
                   <button mat-menu-item>
@@ -77,14 +77,15 @@
           <li *ngIf="IsAdmin">
             <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
             <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
-            <p>ยินดีต้อนรับคุณ {{user.fullname}}</p>
+             
             <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
             <mat-menu  #menu="matMenu">
               <!-- <button mat-menu-item>
                 <mat-icon>account_circle</mat-icon>
                 <a routerLink="/admin" style="color: rgb(0, 0, 0); text-decoration: none;"><span >โปรไฟล์ของคุณ</span></a>
               </button> -->
-              
+              <div class="container"><p>สวัสดีคุณ {{user.fullname}}</p></div>
+
               <button mat-menu-item>
                 <mat-icon>logout</mat-icon>
                 <a routerLink="/login" style="color: rgb(0, 0, 0); text-decoration: none;" (click)="Logout()"><span >ออกจากระบบ</span></a>
