@@ -6,7 +6,6 @@ import { LotteryService } from 'src/app/service/lottery.service';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/service/auth.service';
 import { LocationStrategy } from '@angular/common';
-import { Title } from '@angular/platform-browser';
 import { CartService } from 'src/app/service/cart.service';
 import Swal from 'sweetalert2';
 
@@ -30,7 +29,7 @@ export class LotteryComponent {
   set_no = '';
   
 
-  constructor(private title:Title,private lotteryService:LotteryService,private http:HttpClient,private router:Router,private message: MessageService,private CartService:CartService){
+  constructor(private lotteryService:LotteryService,private http:HttpClient,private router:Router,private message: MessageService,private CartService:CartService){
     
    
     this.http.get<any[]>(this.lotteryService.api_endpoint + '/lotteries').subscribe((data) => {
@@ -57,8 +56,7 @@ export class LotteryComponent {
 
   }
   ngOnInit(): void {
-    this.title.setTitle('Search')
-     
+      
      this.FetchData;
      if(this.IsLoggedIn){
       if( this.user.roles == 'member'){

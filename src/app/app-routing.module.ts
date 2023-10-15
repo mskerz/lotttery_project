@@ -14,14 +14,14 @@ const routes: Routes = [
  
   {path: '', component:MainComponent,children:[
     {path:'',component: HomeComponent},
-    {path: 'lottery', component:LotteryComponent},
-    {path: 'login', component:LoginComponent,data:{title: 'Login'}},
-    {path: 'register', component:RegisterComponent},
-    {path:'admin/dashboard', component:DashboardComponent,title: 'Admin Dashboard'},
-    {path:'admin/lottery',component:LotteryComponent},
-    {path:'admin/lottery/manage',component:LotteryManageComponent},
-     {path:'member/lottery',component:LotteryComponent},
-     {path:'member/lottery/history/:user_id',component:HistoryOrderComponent}
+    {path: 'lottery', component:LotteryComponent,title:'ค้นหาสลาก'},
+    {path: 'login', component:LoginComponent,title: 'เข้าสู่ระบบ'},
+    {path: 'register', component:RegisterComponent,title:'สมัครสมาชิก'},
+    {path:'admin/dashboard', component:DashboardComponent,title: 'รายงานการซื้อ'},
+    {path:'admin/lottery',component:LotteryComponent,title:'ค้นหาสลาก'},
+    {path:'admin/lottery/manage',component:LotteryManageComponent,title:'จัดการสลาก'},
+     {path:'member/lottery',component:LotteryComponent,title:'ค้นหาสลาก'},
+     {path:'member/lottery/history/:user_id',component:HistoryOrderComponent,title:'ประวัติการซื้อย้อนหลัง'}
     
   ]},
   

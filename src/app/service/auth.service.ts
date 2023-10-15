@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,46 +7,36 @@ import { Injectable, OnInit } from '@angular/core';
 export class AuthService implements OnInit {
   api_endpoint:string = 'http://localhost:80/api_lottery'
   
-  
+  loginEvent: EventEmitter<{ isLoggedIn: boolean, user: any }> = new EventEmitter<{ isLoggedIn: boolean, user: any }>();
+  logoutEvent: EventEmitter<void> = new EventEmitter<void>();
+
   user:any ;
-  isLoggedIn :boolean =false;
-  isAdmin :boolean =false;
+   
   constructor(private http:HttpClient) { 
      
   }
   ngOnInit()  {
-    
-  }
-
-   
-  IsLoggedIn():boolean {
-     
     const current_user = localStorage.getItem('currentUser');
     if(current_user){
       this.user = JSON.parse(current_user);
-      return true;
     }
-    return false;
   }
 
-  IsAdmin():boolean {
-    let isadmin =false;
-    if(this.user.roles =="admin"){
-      isadmin = true;
-    }else if(this.user.roles =="member"){
-      isadmin = false;
-    }
-    return isadmin;
-  }
+   
+  
+
+  
 
 
   OnLogin(email:string, password:string){
+    this.loginEvent.emit({ isLoggedIn: true, user: this.user });
     return this.http.post(this.api_endpoint+"/member/login",{email,password});
   }
   getMember(){
     return this.http.get(this.api_endpoint+"/members");
   }
   Logout(){
+    this.logoutEvent.emit();
     localStorage.removeItem('currentUser');
   }
 

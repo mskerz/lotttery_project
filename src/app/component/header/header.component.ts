@@ -20,12 +20,21 @@ export class HeaderComponent implements OnInit {
    
   constructor(private auth:AuthService,private cartDialog:MatDialog,private router :Router,private cartService: CartService){
     this.cartItemCount = this.cartService.getCart().length;
+
+    this.auth.loginEvent.subscribe((data: { isLoggedIn: boolean, user: any })=>{
+     
+      setTimeout(() => {
+        this.isLoggedIn = data.isLoggedIn;
+      }, 2000);
+       
+    });
+    
   }
   
   ngOnInit(): void {
     // ตรวจสอบว่ามีข้อมูลผู้ใช้ใน localStorage หรือไม่
     const current_user = localStorage.getItem('currentUser');
-
+    
     if (current_user) {
       
       this.user = JSON.parse(current_user);

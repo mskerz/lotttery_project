@@ -1,4 +1,5 @@
- import { HttpClient } from '@angular/common/http';
+ import { formatDate } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class OrderService {
   private apiUrl = 'http://localhost/api_lottery'; // ระบุ URL ของ API ของคุณ
+  CurrentDate = new Date();
   response:any ;
   constructor(private http: HttpClient) { }
 
@@ -21,21 +23,22 @@ export class OrderService {
   }
   getMonthReport(month: string){
     if(month==''){
-      return this.http.get(`${this.apiUrl}/lotteries/admin/report_order?monthly=10/2023`);
+      return this.http.get<any[]>(`${this.apiUrl}/lotteries/admin/report_order?monthly=10/2023`);
     }
-    return this.http.get(`${this.apiUrl}/lotteries/admin/report_order?month=${month}`);
+    return this.http.get<any[]>(`${this.apiUrl}/lotteries/admin/report_order?month=${month}`);
   }
   getDailyReport(day: string){
     if(day==''){
-      return this.http.get(`${this.apiUrl}/lotteries/admin/report_order?daily=2023-10-11`);
+      day = formatDate(this.CurrentDate,'yyyy-MM-dd', 'en-US');
+      return this.http.get<any[]>(`${this.apiUrl}/lotteries/admin/report_order?daily=${day}`);
 
     }
-    return this.http.get(`${this.apiUrl}/lotteries/admin/report_order?daily=${day}`);
+    return this.http.get<any[]>(`${this.apiUrl}/lotteries/admin/report_order?daily=${day}`);
 
   }
    
   getHistory(user_id: number){
-    return   this.http.get(`${this.apiUrl}/history/${user_id}`);
+    return   this.http.get<any[]>(`${this.apiUrl}/history/${user_id}`);
   }
   getDetailOrder(user_id: number){
     return this.http.get(this.apiUrl+"/last_order/"+user_id);

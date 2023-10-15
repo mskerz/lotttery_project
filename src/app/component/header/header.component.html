@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark"  >
+<nav class="navbar navbar-expand-lg navbar-dark bg-navbar"  > <!--bg-dark-->
   <div class="container-fluid">
     <a class="navbar-brand" href="/"> {{ title }} </a>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -35,16 +35,16 @@
 
       </ul>
       <ul class="nav navbar-nav  " style="margin-left: auto; display: flex; flex-direction: row;">
-        <div *ngIf="isLoggedIn==false" class="d-inline-flex">
+        <div *ngIf="!isLoggedIn" class="d-inline-flex">
             <li >
               <button routerLink="/login" class="  btn" style="color: white; text-decoration: none;" >เข้าสู่ระบบ</button>
             </li>
             <li  >
-              <a routerLink="/register" class="  btn btn-primary" style="color: white; text-decoration: none;"  >สมัครสมาชิก</a>
+              <a routerLink="/register" class="  btn btn-light" style="color: rgb(7, 7, 7); text-decoration: none;"  >สมัครสมาชิก</a>
             </li>
         </div>
-        <div *ngIf="isLoggedIn">
-            <li *ngIf="!IsAdmin">
+        <div *ngIf="isLoggedIn && !IsAdmin">
+            <li  >
               <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
               <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
               <a   style="color: white;text-decoration: none;" mat-button (click)="OpenCart()">
@@ -73,18 +73,21 @@
            
             </li>
         </div>
-        <div *ngIf="isLoggedIn">
-          <li *ngIf="IsAdmin">
+        <div *ngIf="isLoggedIn &&IsAdmin">
+          <li >
             <!-- แสดงเมนูหรือส่วนอื่น ๆ สำหรับผู้ใช้ที่ลงทะเบียนและล็อกอินเรียบร้อย -->
             <!-- เช่น เมนู Logout หรือรายละเอียดของผู้ใช้ -->
-             
-            <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
-            <mat-menu  #menu="matMenu">
+            <div class="m-0">
+              <p class="d-inline" style="color: aliceblue;">สวัสดีคุณแอดมิน {{user.fullname.split(' ')[0]}}</p>
+              <button style="color: white; text-decoration: none;" mat-button [matMenuTriggerFor]="menu"><mat-icon>account_circle</mat-icon></button>
+           
+            </div>
+             <mat-menu  #menu="matMenu">
               <!-- <button mat-menu-item>
                 <mat-icon>account_circle</mat-icon>
                 <a routerLink="/admin" style="color: rgb(0, 0, 0); text-decoration: none;"><span >โปรไฟล์ของคุณ</span></a>
               </button> -->
-              <div class="container"><p>สวัสดีคุณ {{user.fullname}}</p></div>
+               
 
               <button mat-menu-item>
                 <mat-icon>logout</mat-icon>

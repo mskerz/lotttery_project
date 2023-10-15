@@ -54,9 +54,12 @@ SaveOrder(){
   this.order.Order(OrderData).subscribe(
     (response) => {
       Swal.fire('สั่งซื้อเสร็จสิ้น', 'คำสั่งซื้อของคุณถูกส่งแล้ว', 'success');
+
       this.cartService.ResetCart();
       this.lotteries = this.cartService.getCart();
       this.calculateTotal();
+      this.close();
+
     },
     (error) => {
       Swal.fire('เกิดข้อผิดพลาด', 'มีข้อผิดพลาดในการสั่งซื้อ', 'error');

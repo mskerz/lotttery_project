@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/primeicons/primeicons.css";
+@import "../node_modules/primeng/resources/themes/lara-light-blue/theme.css";
+
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 html, body { height: 100%; }
 body { 
@@ -10,4 +12,10 @@ body {
 .p-sidebar {
     color: #fff;
     background-color: rgb(47, 47, 47) !important;
+}
+.rounded-button {
+    border-radius: 45px; /* ค่า border-radius ที่คุณต้องการให้เป็นกลม */
+}
+.table-ripped{
+    border: 1px solid #00000030;
 }

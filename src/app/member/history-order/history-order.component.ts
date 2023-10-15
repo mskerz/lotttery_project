@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/service/order.service';
 import { ActivatedRoute } from '@angular/router'
 import { Table } from 'primeng/table';
-import { Title } from '@angular/platform-browser';
-
+ 
 @Component({
   selector: 'app-history-order',
   templateUrl: './history-order.component.html',
@@ -15,10 +14,10 @@ export class HistoryOrderComponent implements OnInit {
     
   searchQuery: string = ''; // Filter by lottery number
   searchDate: string = '';
- constructor(private orderService:OrderService,private route:ActivatedRoute,private title:Title){}
+ constructor(private orderService:OrderService,private route:ActivatedRoute){}
 
  ngOnInit() {
-    this.title.setTitle('ประวัติการซื้อ')
+    
 
      this.route.params.subscribe(params=>{
       this.user_id = params['user_id'];
@@ -27,8 +26,25 @@ export class HistoryOrderComponent implements OnInit {
      
  }
  fetch(){
-    this.orderService.getHistory(this.user_id).subscribe((data:any) => {
-        this.history_orders = data;
+    this.orderService.getHistory(this.user_id).subscribe((data) => {
+        this.history_orders = data.map((item)=>{
+          return{
+            purchase_date: item.purchase_date,
+            fullname: item.fullname,
+            lottery_number: item.lottery_number.toString().padStart(6, '0'), // เติม 0 นำหน้าถ้ามีน้อยกว่า 6 หลัก
+            quantity_order: item.quantity_order,
+            price: item.price,
+            total_price: item.total_price
+          };
+        //   {
+        //     purchase_date: item.purchase_date,
+        //    "fullname": "Fairy Dragonic",
+        //    "lottery_number": 743833,
+        //    "quantity_order": 3,
+        //    "price": 85,
+        //    "total_price": 255
+        //  }
+        });
          
     });
  }
@@ -44,6 +60,8 @@ applyFilters() {
     this.history_orders = this.history_orders.filter(order => {
       return order.lottery_number.toString().includes(this.searchQuery);
     });
+  }else if (this.searchDate=='') {
+    this.fetch();
   }
 
   // Filter by purchase date (assuming purchase_date is in 'yyyy-MM-dd' format)

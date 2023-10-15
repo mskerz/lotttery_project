@@ -7,21 +7,25 @@
       <div class="col-md-8 ">
         <div class="card">
           <div class="card-header">
+            
             <h5>รายงานประจำวัน</h5>
             <div class="d-flex flex-row">
-              <mat-form-field >
+              <p-calendar dateFormat="yy-mm-dd" [(ngModel)]="selectedDate" dataType="string"></p-calendar>
+               <!-- <mat-form-field >
                 <mat-label>ค้นหา</mat-label>
                 <input matInput type="date" [(ngModel)]="date"  >
                 <button *ngIf="date" matSuffix mat-icon-button aria-label="Clear" (click)="date=''">
                   <mat-icon>close</mat-icon>
               </button>
-              </mat-form-field>
-              <button mat-raised-button color="primary" class="ms-3" style="display: block;" (click)="SearchDaily(date)"  ><mat-icon>search</mat-icon></button>
-            </div>
+              </mat-form-field> -->
+               
+              <p-button class="ms-2" icon="pi pi-search"  styleClass="rounded-button"   (click)="SearchDaily(selectedDate)" ></p-button>
+
+             </div>
             
           </div>
           <div class="card-body">
-            <p-table [value]="orders_bydaily" *ngIf="orders_bydaily.length > 0">
+            <p-table [value]="orders_bydaily"   *ngIf="orders_bydaily.length > 0" [tableStyle]="{ 'min-width': '50rem' }" >
   
               <ng-template pTemplate="header">
                 <tr>
@@ -32,30 +36,24 @@
                   <!-- เพิ่มหัวข้อคอลัมน์อื่น ๆ ตามที่ต้องการ -->
                 </tr>
               </ng-template>
-              <ng-template pTemplate="emptymessage" *ngIf="orders_bydaily.length === 0" >
-                <div  >
-                  <div class="d-flex flex-column p-4">
-                    <p class="h3 text-secondary">ไม่พบการซื้อในวันที่ค้นหา</p>
-                  </div>
-                </div>
-              </ng-template>
-              <ng-template pTemplate="body" let-order >
+              
+              <ng-template pTemplate="body" let-order  *ngIf="orders_bydaily.length > 0">
                 <tr>
                   <td>{{ order.order_id }}</td>
                   <td>{{ order.fullname }}</td>
                   <td>{{ order.purchase_date  }}</td>
-                  <td>{{order.total_order_price}} บาท  <button color="primary" mat-button (click)="toggleOrderDetails(order.order_id)">รายละเอียด</button></td>
+                  <td>{{order.total_order_price}} บาท  <button color="primary" mat-button (click)="toggleDaily(order.order_id)">รายละเอียด</button></td>
                   
                   <!-- แสดงข้อมูลอื่น ๆ ตามที่ต้องการ -->
                 </tr>
-                 
-                <tr *ngIf="orderDetailsVisible[order.order_id]">
+                
+                <tr *ngIf="Details_Daily[order.order_id]">
                     <td colspan="4">
                       <!-- แสดงรายละเอียด lotteries ของ order นี้ที่คุณต้องการ -->
                       <!-- ใช้ ngFor วนลูป lotteries ที่อยู่ใน order.orders -->
                       <ul>
                         <li *ngFor="let lottery of order.orders">
-                          หมายเลขสลาก: {{ lottery.lottery_number }},
+                          หมายเลขสลาก: {{ lottery.lottery_number.toString().padStart(6, '0') }},
                           จำนวนที่สั่ง: {{ lottery.quantity_order }} ใบ,
                           ราคาต่อใบ: {{ lottery.price }} บาท,
                           ราคารวม: {{ lottery.total_price }} บาท
@@ -64,9 +62,18 @@
                     </td>
                   </tr>
               </ng-template>
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="2"></td>
+                  <td>สรุปยอดรวมวันนี้</td>
+                  <td>{{ total_daily.toLocaleString('en-GB') }} บาท</td>
+                </tr>
+              </ng-template>
             </p-table>
             <div *ngIf="orders_bydaily.length === 0">
-              <p>No orders found on the selected date.</p>
+              <div class="d-flex flex-column p-3">
+                <p class="h3 text-secondary">ไม่มีรายงานการซื้อในวันนี้</p>
+              </div>
             </div>
             
           </div>
@@ -75,6 +82,10 @@
         <div class="card">
           <div class="card-header">
             <h5>รายงานประจำเดือน</h5>
+            <p-calendar [(ngModel)]="SelectedMonthly" dateFormat="mm/yy" view="month"></p-calendar>
+            <p-button class="ms-2" icon="pi pi-search"  styleClass="rounded-button p-button-secondary"     (click)="log()" ></p-button>
+
+
           </div>
           <div class="card-body">
             <p-table [value]="orders_bymonthly" [rows]="5"  [paginator]="true" [paginatorPosition]="'bottom'">
@@ -111,6 +122,7 @@
                     </td>
                   </tr>
               </ng-template>
+              
             </p-table>
           </div>
         </div>
