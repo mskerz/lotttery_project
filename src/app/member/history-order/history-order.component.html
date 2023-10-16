@@ -58,10 +58,11 @@
                 <tr *ngIf="orders">
                     <td>{{orders.purchase_date}}</td>
                     <td>{{orders.fullname}}</td>
-                     <td>{{orders.lottery_number}}  <!--a  mat-button color="primary" (click)="toggleOrderDetails(orders.order_id)">ดูรายละเอียด</a--></td>
+                     <td>{{orders.lottery_number.toString().padStart(6, '0')}}  <!--a  mat-button color="primary" (click)="toggleOrderDetails(orders.order_id)">ดูรายละเอียด</a--></td>
                      <td>{{orders.quantity_order}}</td>
                      <td>{{orders.price}}</td>
                      <td>{{orders.total_price}}</td>
+                     <td> <button mat-raised-button color="primary" (click)="openDetails(orders)">ดูรายละเอียด</button></td>
                 </tr>
                  
                  

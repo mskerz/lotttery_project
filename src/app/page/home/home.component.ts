@@ -9,6 +9,6 @@ import { Title } from '@angular/platform-browser';
 export class HomeComponent  implements OnInit {
   constructor(private title:Title){}
   ngOnInit(): void {
-    this.title.setTitle("Lottery Homepage")
+    this.title.setTitle("หน้าแรก")
   }
 }

@@ -1,0 +1,70 @@
+<div class="container"    >
+    <div class="d-flex flex-row justify-content-between align-items-center" >
+        <mat-icon style="font-size: 25px;">keyboard_arrow_right</mat-icon>
+        <div class="d-inline-flex" style="font-size: 23px;font-weight: bold;">
+            รายละเอียดการซื้อ</div>
+        <button mat-icon-button   style="top:0; float: right; color: red;" (click)="close()"><mat-icon>close</mat-icon></button>
+    </div>
+   
+     
+    <div  class="m-3 p-4" style="margin: 30px; width: 500px; font-size: 20px;text-align: justify;" >
+        
+            <div class="d-flex flex-column p-3 mb-3"  >
+                <p-divider align="left">
+                    <div class="inline-flex align-items-center">
+                        <i class="pi pi-user mr-2"></i>
+                        <span >&nbsp;ข้อมูลผู้ซื้อ</span>
+                    </div>
+                </p-divider>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">ชื่อ-นามสกุล</div>
+                    <div class="col">{{SelectedOrder.fullname}}</div>
+                </div>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">อีเมลผู้ซื้อ</div>
+                    <div class="col">{{user.email}}</div>
+                </div>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">เบอร์โทรศัพท์</div>
+                    <div class="col">{{user.phone_no}}</div>
+                </div>
+ 
+            </div>
+            <div class="d-flex flex-column p-3 mt-3"  >
+                <p-divider align="left">
+                    <div class="inline-flex align-items-center">
+                        <i class="pi pi-info-circle mr-2"></i>
+                        <span >&nbsp;รายละเอียด</span>
+                    </div>
+                </p-divider>
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">วันที่ซื้อ</div>
+                    <div class="col">{{SelectedOrder.purchase_date}}</div>
+                </div>
+                 
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">หมายเลขสลาก</div>
+                    <div class="col"><span  >{{ SelectedOrder.lottery_number.toString().padStart(6, '0') }}</span></div>
+                </div>
+                 
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">จำนวน</div>
+                    <div class="col">{{SelectedOrder.quantity_order}} ใบ</div>
+                </div>
+                 
+                <div class="row justify-content-center align-items-center g-2">
+                    <div class="col">ราคาต่อใบ</div>
+                    <div class="col">{{SelectedOrder.price}} บาท</div>
+                </div>
+                 
+                <div class="row justify-content-center align-items-center g-2">
+                     
+                    <div class="col ms-auto">ราคารวม <span class="rounded-1 p-1" style="background-color: rgb(227, 235, 240);;">{{SelectedOrder.total_price}}</span> บาท</div>
+                </div>
+                 
+                
+                
+            </div>
+ 
+    </div>
+</div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/service/order.service';
 import { ActivatedRoute } from '@angular/router'
 import { Table } from 'primeng/table';
+import { HistoryOrderUser as HistoryOrder,Convert as History_Convert } from 'src/app/model/historyorder.model';
+import { DetailPurchaseComponent } from '../detailpurchase/detailpurchase.component';
+import { MatDialog } from '@angular/material/dialog';
  
 @Component({
   selector: 'app-history-order',
@@ -9,12 +12,12 @@ import { Table } from 'primeng/table';
   styleUrls: ['./history-order.component.scss']
 })
 export class HistoryOrderComponent implements OnInit {
- history_orders = Array<any>();
+ history_orders = Array<HistoryOrder>();
   user_id:number=0;
     
   searchQuery: string = ''; // Filter by lottery number
   searchDate: string = '';
- constructor(private orderService:OrderService,private route:ActivatedRoute){}
+ constructor(private orderService:OrderService,private route:ActivatedRoute,private dialog:MatDialog){}
 
  ngOnInit() {
     
@@ -27,24 +30,8 @@ export class HistoryOrderComponent implements OnInit {
  }
  fetch(){
     this.orderService.getHistory(this.user_id).subscribe((data) => {
-        this.history_orders = data.map((item)=>{
-          return{
-            purchase_date: item.purchase_date,
-            fullname: item.fullname,
-            lottery_number: item.lottery_number.toString().padStart(6, '0'), // เติม 0 นำหน้าถ้ามีน้อยกว่า 6 หลัก
-            quantity_order: item.quantity_order,
-            price: item.price,
-            total_price: item.total_price
-          };
-        //   {
-        //     purchase_date: item.purchase_date,
-        //    "fullname": "Fairy Dragonic",
-        //    "lottery_number": 743833,
-        //    "quantity_order": 3,
-        //    "price": 85,
-        //    "total_price": 255
-        //  }
-        });
+        this.history_orders = History_Convert.toHistoryOrderUser(JSON.stringify(data));
+         console.log(typeof this.history_orders);
          
     });
  }
@@ -53,6 +40,13 @@ export class HistoryOrderComponent implements OnInit {
   this.searchQuery='';
   this.searchDate = '';
   this.fetch();
+  }
+
+  openDetails(SelectedOrder:any) {
+     this.orderService.order = SelectedOrder;
+     this.dialog.open(DetailPurchaseComponent,{
+      minWidth:'300px',
+    });
   }
 applyFilters() {
   // Filter by lottery number

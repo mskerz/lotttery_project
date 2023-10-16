@@ -82,13 +82,13 @@
         <div class="card">
           <div class="card-header">
             <h5>รายงานประจำเดือน</h5>
-            <p-calendar [(ngModel)]="SelectedMonthly" dateFormat="mm/yy" view="month"></p-calendar>
-            <p-button class="ms-2" icon="pi pi-search"  styleClass="rounded-button p-button-secondary"     (click)="log()" ></p-button>
+            <p-calendar [(ngModel)]="SelectedMonthly" dateFormat="mm-yy" view="month"></p-calendar>
+            <p-button class="ms-2" icon="pi pi-search"  styleClass="rounded-button p-button-secondary"     (click)="SearchMonth(SelectedMonthly)" ></p-button>
 
 
           </div>
           <div class="card-body">
-            <p-table [value]="orders_bymonthly" [rows]="5"  [paginator]="true" [paginatorPosition]="'bottom'">
+            <p-table [value]="orders_bymonthly"  *ngIf="orders_bymonthly.length > 0"  [rows]="5"  [paginator]="true" [paginatorPosition]="'bottom'">
               <ng-template pTemplate="header">
                 <tr>
                   <th>เลขคำสั่งซื้อ</th>
@@ -98,7 +98,7 @@
                   <!-- เพิ่มหัวข้อคอลัมน์อื่น ๆ ตามที่ต้องการ -->
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-order>
+              <ng-template pTemplate="body" let-order *ngIf="orders_bymonthly.length > 0">
                 <tr>
                   <td>{{ order.order_id }}</td>
                   <td>{{ order.fullname }}</td>
@@ -122,8 +122,20 @@
                     </td>
                   </tr>
               </ng-template>
-              
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="2"></td>
+                  <td>สรุปยอดรวมเดือนนี้</td>
+                  <td>{{ total_monthly.toLocaleString('en-GB') }} บาท</td>
+                </tr>
+              </ng-template>
             </p-table>
+            <div *ngIf="orders_bymonthly.length === 0">
+              <div class="d-flex flex-column p-3">
+                <p class="h3 text-secondary">ไม่มีรายงานการซื้อในเดือนนี้</p>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>

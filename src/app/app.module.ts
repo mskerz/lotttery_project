@@ -51,6 +51,9 @@ import { HistoryOrderComponent } from './member/history-order/history-order.comp
 import { ButtonModule } from 'primeng/button';
 import { CardComponent } from './component/card/card.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from 'primeng/divider';
+
+import { DetailPurchaseComponent } from './member/detailpurchase/detailpurchase.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,8 @@ import { CalendarModule } from 'primeng/calendar';
     EditLotteryComponent,
     DashboardComponent,
     HistoryOrderComponent,
-    CardComponent
+    CardComponent,
+    DetailPurchaseComponent
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,7 @@ import { CalendarModule } from 'primeng/calendar';
     DropdownModule,
     InputTextModule,
     MatSnackBarModule,
-    MatSidenavModule,MatToolbarModule,SidebarModule,ButtonModule,CalendarModule
+    MatSidenavModule,MatToolbarModule,SidebarModule,ButtonModule,CalendarModule,DividerModule
    ],
   providers: [Title],
   bootstrap: [AppComponent]

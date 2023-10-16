@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   Details_Daily: { [order_id: string]: boolean } = {}; // ตัวแปรเก็บสถานะการแสดงรายละเอียด
   orderDetailsVisible: { [order_id: string]: boolean } = {}; // ตัวแปรเก็บสถานะการแสดงรายละเอียด
   total_daily=0;
+  total_monthly=0;
   constructor(private orderService:OrderService){
    }
 
@@ -26,18 +27,20 @@ export class DashboardComponent implements OnInit {
        this.FetchReport();
    }
   
-  log(){
-    console.log(formatDate(this.SelectedMonthly,'MM/yyyy', 'en-US'));
-  }
+   
    
   FetchReport(){
+    let currentDate = new Date();
+    this.date = formatDate(currentDate,'yyyy-MM-dd', 'en-US');
     this.orderService.getDailyReport(this.date).subscribe((data:any) => {
       this.orders_bydaily = data;
-      this.calculateTotalDaily();
+      this.calDaily();
   
     });
+    this.month = formatDate(currentDate,'MM-yyyy', 'en-US')
     this.orderService.getMonthReport(this.month).subscribe((data:any) => {
       this.orders_bymonthly = data;
+      this.calMonthly();
     });
   }
   toggleDaily(order_id:string){
@@ -46,28 +49,32 @@ export class DashboardComponent implements OnInit {
   toggleOrderDetails(order_id: string) {
     this.orderDetailsVisible[order_id] = !this.orderDetailsVisible[order_id];
   }
-  
+  calDaily() {
+    this.total_daily = this.orders_bydaily.reduce((total, order) => total + order.total_order_price, 0);
+  }
+  calMonthly(){
+    this.total_monthly = this.orders_bymonthly.reduce((total, order) => total + order.total_order_price, 0);
+  }
   SearchDaily(selectedDate:Date) {
 
-    this.date = formatDate(this.selectedDate,'yyyy-MM-dd', 'en-US');
+    this.date = formatDate(selectedDate,'yyyy-MM-dd', 'en-US');
     this.orderService.getDailyReport(this.date).subscribe((data:any) => {
       this.orders_bydaily = data;
       console.log(this.date);
       console.log(this.orders_bydaily);
-      this.calculateTotalDaily();
+      this.calDaily();
 
      });
      
   }
-  calculateTotalDaily() {
-    this.total_daily = this.orders_bydaily.reduce((total, order) => total + order.total_order_price, 0);
-  }
-  SearchMonth(month:string) {
-    this.orderService.getDailyReport(month).subscribe((data:any) => {
+ 
+  SearchMonth(SelectedMonthly:Date) {
+     let monthly =  formatDate(SelectedMonthly,'MM-yyyy', 'en-US')        
+    this.orderService.getMonthReport(monthly).subscribe((data:any) => {
       this.orders_bymonthly = data;
-    },(err)=>{
-      console.error(err);
-      console.log('ไม่พบ');
+      console.log(this.orders_bymonthly);
+      
+      this.calMonthly();
     });
   }
 }
