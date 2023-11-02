@@ -22,7 +22,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-deploy in  [](https://lotteryg112566.bowlab.net/lottery_app/)
+deploy in  [here](https://lotteryg112566.bowlab.net/lottery_app/)
 
 ## Running unit tests
 
