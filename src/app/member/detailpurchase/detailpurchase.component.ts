@@ -11,6 +11,7 @@ import { OrderService } from 'src/app/service/order.service';
 export class DetailPurchaseComponent implements OnInit {
   SelectedOrder:HistoryOrder;
   user:any;
+  
   constructor(private orderService:OrderService,private dialog:MatDialogRef<DetailPurchaseComponent>){
     this.SelectedOrder = this.orderService.order;
     console.log(this.SelectedOrder);

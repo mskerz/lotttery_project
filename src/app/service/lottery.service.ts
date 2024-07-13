@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class LotteryService {
-  api_endpoint:string = 'http://localhost/api_lottery'
+  api_endpoint:string = 'https://lotteryg112566.bowlab.net/api_lottery'
   
   cart:Lottery[]=[];
   response:any;

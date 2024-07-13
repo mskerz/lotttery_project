@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
  constructor(private message:MatDialogRef<CartComponent>,private cartService:CartService,private order:OrderService){}
  
 ngOnInit(){
-  const this_user = localStorage.getItem('currentUser');
+  const this_user = sessionStorage.getItem('currentUser');
   if(this_user){
     this.user = JSON.parse(this_user);
   }
@@ -108,9 +108,17 @@ calculateTotal() {
 
 CancelOrder(){
   
-  this.cartService.ResetCart();
-  this.lotteries = this.cartService.getCart();
-  this.calculateTotal();
+  Swal.fire({
+    title: 'Cancel Order ?',
+    showConfirmButton: true,
+    showCancelButton:true,
+  }).then((result)=>{
+    if(result.isConfirmed){
+      this.cartService.ResetCart();
+      this.lotteries = this.cartService.getCart();
+      this.calculateTotal();
+    }
+  });
 }
 
 }

@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
     // ตรวจสอบว่ามีข้อมูลผู้ใช้ใน localStorage หรือไม่
-    const current_user = localStorage.getItem('currentUser');
+    const current_user = sessionStorage.getItem('currentUser');
     
     if (current_user) {
       

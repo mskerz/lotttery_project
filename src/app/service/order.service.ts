@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost/api_lottery'; // ระบุ URL ของ API ของคุณ
+  private apiUrl = 'https://lotteryg112566.bowlab.net/api_lottery'; // ระบุ URL ของ API ของคุณ
   CurrentDate = new Date();
   response:any ;
   order:any;

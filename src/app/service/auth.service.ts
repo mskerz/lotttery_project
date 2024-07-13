@@ -5,7 +5,7 @@ import { EventEmitter, Injectable, OnInit } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService implements OnInit {
-  api_endpoint:string = 'http://localhost:80/api_lottery'
+  api_endpoint:string = 'https://lotteryg112566.bowlab.net/api_lottery'
   
   loginEvent: EventEmitter<{ isLoggedIn: boolean, user: any }> = new EventEmitter<{ isLoggedIn: boolean, user: any }>();
   logoutEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -16,7 +16,7 @@ export class AuthService implements OnInit {
      
   }
   ngOnInit()  {
-    const current_user = localStorage.getItem('currentUser');
+    const current_user = sessionStorage.getItem('currentUser');
     if(current_user){
       this.user = JSON.parse(current_user);
     }
@@ -37,7 +37,7 @@ export class AuthService implements OnInit {
   }
   Logout(){
     this.logoutEvent.emit();
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
   }
 
   formatBirthdate(birthdate: string): string {

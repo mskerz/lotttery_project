@@ -95,7 +95,7 @@ export class RegisterComponent implements OnInit {
                   this.router.navigate(['/member/lottery']);  //dashboard 
                 }, 2000);
               }
-              localStorage.setItem('currentUser', JSON.stringify(response));
+              sessionStorage.setItem('currentUser', JSON.stringify(response));
              
               // คุณสามารถนำผลลัพธ์ไปทำอย่างอื่น ๆ ที่คุณต้องการที่นี่
             },

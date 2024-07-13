@@ -56,19 +56,19 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.title.setTitle('เข้าสู่ระบบ');
-    const rememberdata = localStorage.getItem('rememberLogin');
+    const rememberdata = sessionStorage.getItem('rememberLogin');
     if (rememberdata) {
       const login_data = JSON.parse(rememberdata);
       this.email = login_data.email;
       this.password = login_data.password;
       this.remember = true;
     }
-    const user_current = localStorage.getItem('currentUser');
+    const user_current = sessionStorage.getItem('currentUser');
     if (user_current) {
       this.isLoggedIn = true;
       this.user = JSON.parse(user_current);
-      if (this.user.roles == '/admin/dashboard') {
-        this.route.navigate(['/']);
+      if (this.user.roles == 'admin') {
+        this.route.navigate(['/admin/dashboard']);
       } else if (this.user.roles == 'member') {
         this.route.navigate(['/member/lottery']);
       }
@@ -96,15 +96,15 @@ export class LoginComponent implements OnInit {
               } else {
                 this.route.navigate(['/member/lottery']);
               }
-              localStorage.setItem('currentUser', JSON.stringify(response));
+              sessionStorage.setItem('currentUser', JSON.stringify(response));
               if (this.remember) {
                 const login = {
                   email: this.email,
                   password: this.password,
                 };
-                localStorage.setItem('rememberLogin', JSON.stringify(login));
+                sessionStorage.setItem('rememberLogin', JSON.stringify(login));
               } else {
-                localStorage.removeItem('rememberLogin');
+                sessionStorage.removeItem('rememberLogin');
               }
             }
           });

@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
-import { AdminComponent } from './page/admin/admin.component';
- import { MainComponent } from './page/main/main.component';
+import { MainComponent } from './page/main/main.component';
 import { HeaderComponent } from './component/header/header.component';
 import { FooterComponent } from './component/footer/footer.component';
 
@@ -33,8 +32,7 @@ import { CartComponent } from './dialog/cart/cart.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BadgeModule } from 'primeng/badge';
 import { TableModule } from 'primeng/table';
-import { ProfileComponent } from './page/profile/profile.component';
-import { HomeComponent } from './page/home/home.component';
+ import { HomeComponent } from './page/home/home.component';
 import { LotteryManageComponent } from './page/lottery-manage/lottery-manage.component';
 import {MatTableModule} from '@angular/material/table';
 import { DropdownModule } from 'primeng/dropdown';
@@ -60,13 +58,12 @@ import { DetailPurchaseComponent } from './member/detailpurchase/detailpurchase.
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent,
-    MainComponent,
+     MainComponent,
     HeaderComponent,
     FooterComponent,
     LotteryComponent,
     CartComponent,
-    ProfileComponent,
+    
     HomeComponent,
     LotteryManageComponent,
     InsertLotteryComponent,

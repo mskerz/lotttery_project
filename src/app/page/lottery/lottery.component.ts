@@ -47,7 +47,7 @@ export class LotteryComponent {
       });
       console.log(this.lotteries);
     });
-    const user_current = localStorage.getItem('currentUser');
+    const user_current = sessionStorage.getItem('currentUser');
     if(user_current){
       this.IsLoggedIn = true;
       this.user = JSON.parse(user_current);

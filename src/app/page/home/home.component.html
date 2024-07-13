@@ -5,7 +5,12 @@
         <div class="col-md-6">
           <h1>Welcome to Lotto Shop <mat-icon>shopping_cart</mat-icon></h1>
           <p>Discover the amazing features of our platform.</p>
-          <button pButton type="button" routerLink="/lottery" label="Search Lottery" class="p-button-primary"></button>
+          <button pButton type="button" *ngIf="!isLoggedIn" routerLink="/lottery" label="Search Lottery" class="p-button-primary"></button>
+          <button pButton type="button" *ngIf="isLoggedIn && !IsAdmin" routerLink="/member/lottery" label="Search Lottery" class="p-button-primary"></button>
+          <button pButton type="button" *ngIf="isLoggedIn && IsAdmin" routerLink="/admin/lottery" label="Search Lottery" class="p-button-primary"></button>
+
+           
+           
         </div>
         <div class="col-md-6">
           <!-- Add any additional content or images for your hero section here -->

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="d-flex flex-row p-3 position-relative">
     <div class="d-inline-flex align-items-center">
       <span class="me-2">Lottery Cart</span>
@@ -9,7 +9,7 @@
   <div class="p-3">
     <div class="d-flex flex-column">
       <div class="card">
-        <p-table [value]="lotteries"  *ngIf="lotteries.length > 0" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="lotteries" class="m-3"  *ngIf="lotteries.length > 0" [tableStyle]="{ 'min-width': '50rem' }">
           <ng-template pTemplate="header">
             <tr>
               <th>หมายเลขสลาก</th>
@@ -17,7 +17,8 @@
               <th>ชุด</th>
               <th>ราคา</th>
               <th>ราคารวมที่ซื้อ</th>
-              <th>จำนวนที่ซื้อ</th>
+              <th class="bg-info">จำนวนที่ซื้อ</th>
+              
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-lottery  >
@@ -28,16 +29,17 @@
               <td>{{ lottery.set_no }}</td>
               <td>{{ lottery.price }} บาท</td>
               <td>{{ lottery.price * lottery.lottery_quantity }}</td>
-              <td class="text-center" >
- 
-                <a (click)="incrementQ(lottery)" mat-icon-button style="color:  rgb(0, 178, 0);"
-                  ><mat-icon>add</mat-icon></a
-                >
-                {{ lottery.lottery_quantity }}
-                <a (click)="decrementQ(lottery)" mat-icon-button style="color: rgb(210, 13, 13);"
-                  ><mat-icon>remove</mat-icon></a
-                >
-              </td>
+              <td >
+                      <div class="d-inline-flex">
+                          <button mat-icon-button class="ms-2 me-2 " color="primary" (click)="incrementQ(lottery)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <input type="text" pInputText class="col-2" [(ngModel)]="lottery.lottery_quantity">
+                        <button mat-icon-button class="ms-2" (click)="decrementQ(lottery)" style="color: rgb(255, 0, 0);">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                      </div>
+                  </td>
               <td><a  (click)="removeItem(lottery)" mat-icon-button><mat-icon>delete</mat-icon></a></td>
                
             </tr>
@@ -89,6 +91,109 @@
         </div>
         
       </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="container">
+  <div class="d-flex flex-row p-3 position-relative">
+    <div class="d-inline-flex align-items-center">
+      <span class="me-2"><h2>Lottery Cart <mat-icon>shopping_cart</mat-icon></h2></span>
+      
+    </div>
+  </div>
+  <div class="p-2" style="margin: 20px;">
+    <div class="justify-content-center align-items-center">
+       
+      <table class="table" *ngIf="lotteries.length > 0">
+          <thead>
+              <tr>
+                  <th class="text-center">Lottery Number</th>
+                  <th class="text-center">Draw No</th>
+                  <th class="text-center">Set No</th>
+                  <th class="text-center">Price</th>
+                  <th class="text-center">Quantity</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let lottery of lotteries">
+                  <td class="text-center">{{ lottery.lottery_number }}</td>
+                  <td class="text-center">{{ lottery.draw_no }}</td>
+                  <td class="text-center">{{ lottery.set_no }}</td>
+                  <td class="text-center">{{ lottery.price }} THB</td>
+                  <td class="text-center">
+                      <button mat-raised-button class="me-2" color="primary" (click)="incrementQ(lottery)">
+                          <mat-icon>add</mat-icon>
+                      </button>
+                      <input type="text" pInputText class="col-2 text-center" [(ngModel)]="lottery.lottery_quantity">
+                      <button mat-raised-button class="ms-2" (click)="decrementQ(lottery)" style="background-color: rgb(227, 54, 54); color: white;">
+                          <mat-icon>remove</mat-icon>
+                      </button>
+                  </td>
+                   
+                  <td class="text-center">{{ lottery.price * lottery.lottery_quantity}} THB</td>
+                  <td class="text-center">
+                      <button (click)="removeItem(lottery)" mat-icon-button>
+                          <mat-icon>delete</mat-icon>
+                      </button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      
+    </div>
+      <div class="container p-3" *ngIf="lotteries.length === 0" style="margin: 30px;">
+        <div class="p-4">
+          <h1>Your cart is empty.</h1>
+        </div>
+    </div>
+    <div *ngIf="lotteries.length!=0" style="margin-right: auto;">
+      <h5>ราคารวมที่ซื้อ  {{total}} บาท</h5>
+    </div>
+    
+    <div class="justify-content-center align-items-center">
+      <a
+        style="background-color: rgb(220, 42, 42);color: #fff;"
+        class="me-auto"
+        mat-raised-button
+
+        *ngIf="lotteries.length===0"
+        (click)="close()">ปิดหน้าต่าง</a >
+    </div>
+    <div class="d-flex flex-row p-4" *ngIf="lotteries.length!=0">
+      
+      <a
+        style="float: left"
+        class="me-auto"
+        mat-raised-button
+        color="accent"
+        
+        (click)="close()"
+      >
+        <mat-icon>chevron_left</mat-icon> แล้วค่อยซื้อทีหลัง</a
+      >
+      <div class="d-flex flex-row ">
+        <a
+         
+        class="ms-2"
+        mat-raised-button
+        color="warn"
+        (click)="CancelOrder()"
+        >ยกเลิกคำสั่งซื้อ
+      </a>
+      <a
+        style="float: right"
+        class="ms-2"
+        mat-raised-button
+        color="primary" (click)="confirmOrder()"
+        >ยืนยันคำสั่งซื้อ
+      </a>
+    </div>
+      
     </div>
   </div>
 </div>

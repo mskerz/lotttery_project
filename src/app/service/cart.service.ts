@@ -9,7 +9,7 @@ export class CartService {
   cart: Lottery[] = [];
   cartUpdated = new Subject<void>();
   constructor() {
-    const cartData = localStorage.getItem('cart');
+    const cartData = sessionStorage.getItem('cart');
     if (cartData) {
       this.cart = JSON.parse(cartData);
     }
@@ -56,9 +56,9 @@ export class CartService {
   }
 
   saveCartToLocalStorage() {
-    localStorage.setItem('cart', JSON.stringify(this.cart));
+    sessionStorage.setItem('cart', JSON.stringify(this.cart));
   }
   clearCartFromLocalStorage() {
-    localStorage.removeItem('cart');
+    sessionStorage.removeItem('cart');
   }
 }

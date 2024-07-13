@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-navbar"  > <!--bg-dark-->
   <div class="container-fluid">
-    <a class="navbar-brand" href="/"> {{ title }} </a>
+    <a class="navbar-brand" routerLink="/"> {{ title }} </a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ">
         <li *ngIf="!isLoggedIn" class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/lottery">ค้นหาสลาก</a>
+          <a class="nav-link active" aria-current="page" routerLink="/lottery">ค้นหาสลาก</a>
         </li>
         <div *ngIf="isLoggedIn">
           
             <li *ngIf="!IsAdmin" class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/member/lottery">ค้นหาสลาก</a>
+              <a class="nav-link active" aria-current="page" routerLink="/member/lottery">ค้นหาสลาก</a>
             </li>
             <li *ngIf="IsAdmin" class="nav-item ">
               <div class="d-flex flex-row">

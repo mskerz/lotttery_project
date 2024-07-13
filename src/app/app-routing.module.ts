@@ -11,7 +11,7 @@ import { DashboardComponent } from './page/dashboard/dashboard.component';
 import { HistoryOrderComponent } from './member/history-order/history-order.component';
 
 const routes: Routes = [
- 
+  
   {path: '', component:MainComponent,children:[
     {path:'',component: HomeComponent},
     {path: 'lottery', component:LotteryComponent,title:'ค้นหาสลาก'},
