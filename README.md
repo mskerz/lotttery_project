@@ -1,12 +1,5 @@
 # LottteryProject
-   
-  โปรเจคเว็บ ล็อตเตอรี่
-  
-  ## ตรวจงานรอบแรก 
-  - ฐานข้อมูล
-  - UI
-  - Service ผู้ใช้งานทั่วไป
-     -  ค้นหาล็อตเตอรี่ได้จาก 3 เลขท้าย งวด ชุด
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
